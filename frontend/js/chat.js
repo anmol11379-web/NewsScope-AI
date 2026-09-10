@@ -8,6 +8,7 @@ import {
   getActiveChatId, setActiveChatId, getChats
 } from './storage.js';
 import { refreshSidebar } from './sidebar.js';
+import { API_BASE_URL } from './config.js';
 
 let chatContainer = null;
 let messagesEl = null;
@@ -214,7 +215,7 @@ async function requestAIResponse(chatId, userMessage) {
       content: m.content
     }));
 
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${API_BASE_URL}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
