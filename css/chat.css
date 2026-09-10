@@ -1,0 +1,388 @@
+/* ═══════════════════════════════════════════════════════
+   NewsScope 2.0 — Chat Interface Styles
+   ═══════════════════════════════════════════════════════ */
+
+/* ════════════════════════════════════════════════════════
+   WELCOME SCREEN
+   ════════════════════════════════════════════════════════ */
+.welcome-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-8);
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.welcome-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-6);
+  box-shadow: 0 0 35px rgba(20, 220, 180, 0.3), var(--accent-glow-lg);
+  position: relative;
+}
+
+.welcome-icon::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, rgba(20, 220, 180, 0.5), rgba(220, 20, 60, 0.4), rgba(20, 220, 180, 0.5));
+  opacity: 0.25;
+  animation: pulse-ring 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+.welcome-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: var(--radius-full);
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+}
+
+.welcome-title {
+  font-size: var(--font-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+}
+
+.welcome-title span {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-subtitle {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-8);
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.welcome-chips {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  max-width: 560px;
+  width: 100%;
+}
+
+.welcome-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--glass-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  text-align: left;
+  transition: background var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+  cursor: pointer;
+}
+
+.welcome-chip:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--accent-soft);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.welcome-chip .chip-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.welcome-chip .chip-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--accent);
+}
+
+.welcome-chip .chip-text {
+  line-height: 1.4;
+}
+
+@media (max-width: 600px) {
+  .welcome-chips {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome-title {
+    font-size: var(--font-xl);
+  }
+}
+
+/* ════════════════════════════════════════════════════════
+   MESSAGE BUBBLES
+   ════════════════════════════════════════════════════════ */
+.message {
+  display: flex;
+  gap: var(--space-3);
+  animation: fade-in-up 0.3s ease-out;
+  max-width: 100%;
+}
+
+/* User Message */
+.message-user {
+  flex-direction: row-reverse;
+}
+
+.message-user .message-content {
+  background: var(--accent-gradient);
+  color: #fff;
+  border-radius: var(--radius-lg) var(--radius-lg) var(--radius-sm) var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  max-width: 70%;
+  font-size: var(--font-base);
+  line-height: 1.6;
+  box-shadow: var(--shadow-sm);
+}
+
+/* AI Message */
+.message-ai {
+  align-items: flex-start;
+}
+
+.message-ai .message-avatar,
+.typing-indicator .message-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 0 10px rgba(20, 220, 180, 0.25);
+  overflow: hidden;
+}
+
+.avatar-logo-img {
+  width: 35px;
+  height: 35px;
+  max-width: 35px;
+  max-height: 35px;
+  object-fit: contain;
+  border-radius: var(--radius-full);
+}
+
+.message-ai .message-content {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm) var(--radius-lg) var(--radius-lg) var(--radius-lg);
+  padding: var(--space-4);
+  max-width: 75%;
+  font-size: var(--font-base);
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.message-ai .message-content p {
+  margin-bottom: var(--space-3);
+}
+
+.message-ai .message-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Message timestamp */
+.message-time {
+  font-size: var(--font-xs);
+  color: var(--text-tertiary);
+  margin-top: var(--space-1);
+  padding: 0 var(--space-1);
+}
+
+.message-user .message-time {
+  text-align: right;
+}
+
+/* ════════════════════════════════════════════════════════
+   NEWS ANALYSIS CARD (embedded in AI responses)
+   ════════════════════════════════════════════════════════ */
+.news-analysis-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-top: var(--space-3);
+}
+
+.analysis-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.analysis-title {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-base);
+  color: var(--text-primary);
+}
+
+/* Credibility Meter */
+.credibility-meter {
+  margin-bottom: var(--space-4);
+}
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+  font-size: var(--font-sm);
+}
+
+.meter-label .label-text {
+  color: var(--text-secondary);
+}
+
+.meter-label .label-value {
+  font-weight: var(--font-weight-semibold);
+}
+
+.meter-bar {
+  height: 8px;
+  background: var(--glass-bg);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1s ease-out;
+  background: var(--accent-gradient);
+}
+
+.meter-fill.high {
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+}
+
+.meter-fill.medium {
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+}
+
+.meter-fill.low {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+}
+
+/* Source List */
+.source-list {
+  margin-top: var(--space-3);
+}
+
+.source-list-title {
+  font-size: var(--font-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.source-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+}
+
+.source-item .source-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════
+   TYPING INDICATOR
+   ════════════════════════════════════════════════════════ */
+.typing-indicator {
+  display: none;
+  gap: var(--space-3);
+  align-items: flex-start;
+  animation: fade-in 0.3s ease-out;
+  max-width: var(--max-chat-width);
+  width: 100%;
+  margin: -80px auto;
+  padding: 0 var(--space-6);
+}
+
+.typing-indicator.active {
+  display: flex;
+}
+
+.typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-3) var(--space-4);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm) var(--radius-lg) var(--radius-lg) var(--radius-lg);
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  animation: typing-bounce 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ════════════════════════════════════════════════════════
+   EMPTY STATE
+   ════════════════════════════════════════════════════════ */
+.no-chats-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-4);
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.no-chats-message svg {
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--space-3);
+  opacity: 0.4;
+}
+
+.no-chats-message p {
+  font-size: var(--font-sm);
+}
