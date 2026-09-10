@@ -50,8 +50,82 @@ export function findUser(email) {
 // ══════════════════════════════════════════════════════
 // CHATS
 // ══════════════════════════════════════════════════════
+export function generateSimplifiedTitle(text) {
+  if (!text || typeof text !== 'string') return 'New Chat';
+
+  let clean = text.trim();
+
+  // Remove quotes and markdown artifacts
+  clean = clean.replace(/^[“"']+|[”"']+$/g, '').trim();
+
+  // Handle common greetings or casual openers
+  const greetings = ['hi', 'hello', 'hey', 'yo', 'sup', 'good morning', 'good evening', 'test', 'help'];
+  if (greetings.includes(clean.toLowerCase())) {
+    return 'General Chat';
+  }
+
+  // If text starts with an intro directive ending in colon/dash, extract the actual claim after it
+  const colonIntroMatch = clean.match(/^(?:can you|please|i want to)?\s*(?:verify|fact-?check|check|analyze|investigate)?\s*(?:this|the)?\s*(?:headline|claim|article|story|news|statement|credibility)?\s*(?:for me)?\s*[:—\-]\s*(.+)$/i);
+  if (colonIntroMatch && colonIntroMatch[1]) {
+    clean = colonIntroMatch[1].trim();
+  } else {
+    // Strip common prompt boilerplate prefixes
+    const prefixes = [
+      /^(?:can you\s+)?(?:please\s+)?(?:verify|fact-?check|check)\s+(?:this\s+)?(?:headline|claim|article|story|news|statement)?\s*(?:for me)?\s*[:—\-]?\s*/i,
+      /^(?:i want to\s+)?(?:verify|check)\s+(?:the credibility of)?\s*[:—\-]?\s*/i,
+      /^(?:analyze\s+)?(?:this\s+)?(?:article|claim)\s+for\s+(?:political bias and framing|bias)?\s*[:—\-]?\s*/i,
+      /^(?:is it true that|did|does|is|are|can)\s+/i,
+      /^(?:what do you know about|tell me about)\s+/i,
+      /^for me\s*[:—\-]?\s*/i,
+    ];
+
+    for (const reg of prefixes) {
+      clean = clean.replace(reg, '').trim();
+    }
+  }
+
+  // Remove surrounding quotes and trailing punctuation
+  clean = clean.replace(/^[“"']+|[”"']+$/g, '').trim();
+  clean = clean.replace(/[?.:!]+$/, '').trim();
+
+  if (!clean || clean.length < 2) return 'General Chat';
+
+  // Truncate cleanly at word boundary (max ~26 chars)
+  const maxLength = 26;
+  if (clean.length > maxLength) {
+    const cut = clean.slice(0, maxLength);
+    const lastSpace = cut.lastIndexOf(' ');
+    clean = (lastSpace > 10 ? cut.slice(0, lastSpace) : cut).trim() + '…';
+  }
+
+  // Capitalize first letter
+  return clean.charAt(0).toUpperCase() + clean.slice(1);
+}
+
 export function getChats() {
-  return getJSON(KEYS.CHATS, []);
+  const chats = getJSON(KEYS.CHATS, []);
+  let changed = false;
+
+  // Sanitize any existing raw or casual titles like "hi"
+  for (const c of chats) {
+    const rawTitle = (c.title || '').trim().toLowerCase();
+    if (['hi', 'hello', 'hey', 'test', 'sup', 'yo'].includes(rawTitle)) {
+      const substantiveMsg = (c.messages || []).find(
+        m => m.role === 'user' && !['hi', 'hello', 'hey', 'test'].includes(m.content.trim().toLowerCase())
+      );
+      c.title = substantiveMsg ? generateSimplifiedTitle(substantiveMsg.content) : 'General Chat';
+      changed = true;
+    } else if (c.title && c.title.length > 35) {
+      c.title = generateSimplifiedTitle(c.title);
+      changed = true;
+    }
+  }
+
+  if (changed) {
+    setJSON(KEYS.CHATS, chats);
+  }
+
+  return chats;
 }
 export function saveChats(chats) {
   setJSON(KEYS.CHATS, chats);
@@ -107,9 +181,18 @@ export function addMessage(chatId, message) {
   chats[idx].messages.push(msg);
   chats[idx].updatedAt = new Date().toISOString();
 
-  // Auto-title from first user message
-  if (chats[idx].title === 'New Chat' && message.role === 'user') {
-    chats[idx].title = message.content.slice(0, 50) + (message.content.length > 50 ? '…' : '');
+  // Auto-title always using simplified formatting
+  const currentTitle = chats[idx].title || '';
+  const isGeneric = ['New Chat', 'General Chat', 'hi', 'hello', 'hey'].includes(currentTitle.trim());
+
+  if (message.role === 'user') {
+    const isGreeting = ['hi', 'hello', 'hey', 'yo', 'sup'].includes(message.content.trim().toLowerCase());
+    if (isGeneric) {
+      chats[idx].title = generateSimplifiedTitle(message.content);
+    } else if (currentTitle === 'General Chat' && !isGreeting) {
+      // Upgrade from General Chat to the actual topic
+      chats[idx].title = generateSimplifiedTitle(message.content);
+    }
   }
 
   saveChats(chats);

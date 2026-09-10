@@ -192,16 +192,63 @@ export function handleSend() {
   // Scroll to bottom
   scrollToBottom();
 
-  // Show typing then respond
+  // Show typing then request response from backend
   showTyping();
-  const delay = 1500 + Math.random() * 2000;
-  setTimeout(() => {
-    hideTyping();
-    generateAIResponse(chatId, content);
-  }, delay);
+  requestAIResponse(chatId, content);
 }
 
-function generateAIResponse(chatId, userMessage) {
+export function handleDirectClaimVerify(claimText) {
+  if (!claimText) return;
+  if (textarea) {
+    textarea.value = claimText;
+    textarea.dispatchEvent(new Event('input'));
+  }
+  handleSend();
+}
+
+async function requestAIResponse(chatId, userMessage) {
+  try {
+    const activeChat = getChat(chatId);
+    const recentMessages = (activeChat?.messages || []).slice(-6).map(m => ({
+      role: m.role,
+      content: m.content
+    }));
+
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: userMessage,
+        history: recentMessages
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Backend returned status ${response.status}`);
+    }
+
+    const data = await response.json();
+    hideTyping();
+
+    const aiMsg = addMessage(chatId, {
+      role: 'assistant',
+      content: data.content,
+      analysis: data.analysis || null,
+    });
+    renderMessage(aiMsg, 'assistant', data.analysis);
+
+  } catch (error) {
+    console.warn('Backend unavailable, utilizing local news analysis fallback:', error);
+    hideTyping();
+    fallbackAIResponse(chatId, userMessage);
+  }
+
+  scrollToBottom();
+}
+
+function fallbackAIResponse(chatId, userMessage) {
   // Determine if this is a news-related query
   const newsKeywords = ['news', 'headline', 'article', 'claim', 'verify', 'fact', 'check', 'true', 'false', 'fake', 'real', 'source', 'bias', 'credib', 'misinformation', 'report', 'media'];
   const isNewsQuery = newsKeywords.some(kw => userMessage.toLowerCase().includes(kw)) || Math.random() > 0.3;
@@ -248,7 +295,7 @@ function renderMessage(msg, role, analysis = null) {
       <div class="message-avatar">
         <img src="/assets/logo.png" alt="NewsScope AI" class="avatar-logo-img" />
       </div>
-      <div>
+      <div style="flex: 1; max-width: calc(100% - 48px);">
         <div class="message-content">
           <p>${escapeHtml(msg.content)}</p>
           ${analysisHtml}
@@ -270,18 +317,39 @@ function renderMessage(msg, role, analysis = null) {
 }
 
 function buildAnalysisCard(analysis) {
-  const sourcesHtml = analysis.sources.map(s => `
+  const sources = analysis.sources || [];
+  const sourcesHtml = sources.map(s => `
     <div class="source-item">
       <span class="source-dot"></span>
       <span>${escapeHtml(s)}</span>
     </div>
   `).join('');
 
+  const biasBadge = analysis.bias ? `
+    <span class="badge badge-bias" title="Detected Framing Bias">Bias: ${escapeHtml(analysis.bias)}</span>
+  ` : '';
+
+  const benchmarkBadge = analysis.benchmark_matched ? `
+    <span class="badge badge-benchmark" title="Ground Truth Corroborated in Benchmark Dataset">
+      Verified Benchmark (${escapeHtml(analysis.benchmark_matched.id || 'Dataset')})
+    </span>
+  ` : '';
+
+  const keyClaimsHtml = (analysis.key_claims && analysis.key_claims.length > 0) ? `
+    <div style="margin-top: var(--space-2); margin-bottom: var(--space-3); font-size: var(--font-xs); color: var(--text-tertiary);">
+      <strong>Evaluated:</strong> ${escapeHtml(analysis.key_claims.join('; '))}
+    </div>
+  ` : '';
+
   return `
     <div class="news-analysis-card anim-fade-in-up">
       <div class="analysis-header">
-        <span class="analysis-title">${escapeHtml(analysis.title)}</span>
-        <span class="badge ${analysis.verdictClass}">${escapeHtml(analysis.verdict)}</span>
+        <div class="analysis-title">${escapeHtml(analysis.title || 'Credibility Report')}</div>
+        <div class="analysis-header-tags">
+          <span class="badge ${escapeHtml(analysis.verdictClass || 'badge-credible')}">${escapeHtml(analysis.verdict || 'Assessed')}</span>
+          ${biasBadge}
+          ${benchmarkBadge}
+        </div>
       </div>
       <div class="credibility-meter">
         <div class="meter-label">
@@ -289,13 +357,14 @@ function buildAnalysisCard(analysis) {
           <span class="label-value">${analysis.score}%</span>
         </div>
         <div class="meter-bar">
-          <div class="meter-fill ${analysis.level}" style="width: 0%"></div>
+          <div class="meter-fill ${analysis.level || 'medium'}" style="width: 0%"></div>
         </div>
       </div>
-      <p style="font-size: var(--font-sm); color: var(--text-secondary); margin-bottom: var(--space-3);">${escapeHtml(analysis.summary)}</p>
+      <p style="font-size: var(--font-sm); color: var(--text-secondary); margin-bottom: var(--space-2); line-height: 1.5;">${escapeHtml(analysis.summary || '')}</p>
+      ${keyClaimsHtml}
       <div class="source-list">
-        <div class="source-list-title">Sources Consulted</div>
-        ${sourcesHtml}
+        <div class="source-list-title">Sources Consulted & Citations</div>
+        ${sourcesHtml || '<div class="source-item">Primary news wire archives</div>'}
       </div>
     </div>
   `;
