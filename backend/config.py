@@ -16,8 +16,8 @@ ENV_FILE = BACKEND_DIR / ".env"
 load_dotenv(dotenv_path=ENV_FILE)
 
 # API Configuration
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AQ.Ab8RN6LXzEUl-qBs613ncyOekDEFtJGuEJChGOxp6cOhV4uRoQ").strip()
-MODEL_NAME = os.getenv("MODEL_NAME", "gemini-3.6-flash").strip()
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+MODEL_NAME = os.getenv("MODEL_NAME", "gemini-3.5-flash").strip()
 
 # Server Configuration
 HOST = os.getenv("HOST", "0.0.0.0")

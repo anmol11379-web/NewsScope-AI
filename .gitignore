@@ -1,7 +1,9 @@
 node_modules/
 dist/
-.envgit rm -r --cached node_modules
-git commit -m "chore: stop tracking node_modules"
-git push origin main
-node_modules
 .env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/

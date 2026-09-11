@@ -80,7 +80,16 @@ class GeminiService:
             self._client = None
 
     def analyze_news(self, query: str, conversation_history: Optional[List[Dict[str, str]]] = None) -> Dict[str, Any]:
-        """Analyzes a news query or conversation using gemini-3.6-flash."""
+        """Analyzes a news query or conversation using Gemini."""
+        lower_q = (query or "").strip().lower()
+        greetings = ["hi", "hello", "hey", "hola", "namaste", "good morning", "good evening", "good afternoon", "who are you", "what can you do", "help"]
+        if any(lower_q == g or lower_q.startswith(g + " ") for g in greetings) and len(lower_q.split()) <= 5:
+            return {
+                "is_news_query": False,
+                "conversational_reply": "Hello! 👋 I'm NewsScope AI, your news verification assistant. Paste any news headline, article, or claim, and I'll analyze its credibility, check for media bias, and pull verified sources for you!",
+                "analysis": None
+            }
+
         if not self._client:
             self._init_client()
             if not self._client:
@@ -111,7 +120,9 @@ Output ONLY valid JSON.
 """
 
         # Primary and backup models
-        models_to_try = [self.model_name, "gemini-2.5-flash"]
+        models_to_try = [self.model_name, "gemini-3.5-flash", "gemini-3.6-flash", "gemini-3.7-flash"]
+        # Remove duplicates while preserving order
+        models_to_try = list(dict.fromkeys(models_to_try))
         last_error = None
 
         for m_name in models_to_try:
@@ -201,8 +212,19 @@ Output ONLY valid JSON.
         }
 
     def _build_offline_fallback(self, query: str, err_msg: str) -> Dict[str, Any]:
+        lower_q = (query or "").strip().lower()
+        greetings = ["hi", "hello", "hey", "hola", "namaste", "good morning", "good evening", "good afternoon", "who are you", "what can you do", "help"]
+        if any(lower_q == g or lower_q.startswith(g + " ") for g in greetings):
+            return {
+                "is_news_query": False,
+                "conversational_reply": "Hello! 👋 I'm NewsScope AI, your news verification assistant. Paste any news headline, article, or claim, and I'll analyze its credibility, check for media bias, and pull verified sources for you!",
+                "analysis": None
+            }
+
         lower_err = (err_msg or "").lower()
-        if "503" in lower_err or "demand" in lower_err or "unavailable" in lower_err or "429" in lower_err:
+        if "401" in lower_err or "unauthenticated" in lower_err or "auth" in lower_err:
+            friendly_message = "The Gemini API key is currently invalid or expired. Please update GEMINI_API_KEY with a valid key from Google AI Studio (starts with AIzaSy...)."
+        elif "503" in lower_err or "demand" in lower_err or "unavailable" in lower_err or "429" in lower_err:
             friendly_message = "The AI verification servers are currently busy due to high traffic. Please try asking again in a few moments."
         elif "connection" in lower_err or "timeout" in lower_err or "network" in lower_err:
             friendly_message = "Unable to connect to the verification service right now. Please check your internet connection and try again."
