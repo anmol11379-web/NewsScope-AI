@@ -2,7 +2,7 @@
 
 Hey there! 👋 Welcome to **NewsScope AI**. 
 
-I built this project to tackle the widespread problem of misinformation, viral fake news, and biased media reporting. It's a full-stack AI-powered news verification chatbot that lets anyone paste a headline, claim, or article snippet to instantly get a credibility score, fact-check summary, bias analysis, and verified sources.
+We built this project to tackle the widespread problem of misinformation, viral fake news, and biased media reporting. It's a full-stack AI-powered news verification chatbot that lets anyone paste a headline, claim, or article snippet to instantly get a credibility score, fact-check summary, bias analysis, and verified sources.
 
 Powered by **Google Gemini 3.6 Flash** on the backend and an interactive chat interface on the frontend.
 
@@ -170,11 +170,3 @@ Open `http://localhost:3000` in your browser!
 - [ ] Browser extension to check articles directly while browsing.
 
 ---
-
-## 👨‍💻 Author
-
-**Anmol Mishra**
-- GitHub: [@anmol11379-web](https://github.com/anmol11379-web)
-- Project: [NewsScope AI](https://github.com/anmol11379-web/NewsScope-AI)
-
-*If you found this project helpful or interesting, feel free to drop a ⭐ on GitHub!*
