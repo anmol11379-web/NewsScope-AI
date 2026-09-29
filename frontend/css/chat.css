@@ -815,6 +815,44 @@
   font-weight: var(--font-weight-normal);
 }
 
+.profile-phone-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-pencil-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid var(--border-subtle);
+  background: var(--glass-bg);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.profile-pencil-btn:hover {
+  background: var(--glass-bg-hover);
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+.profile-pencil-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+.profile-phone-edit-wrap {
+  margin-top: 4px;
+  animation: fade-in 0.2s ease;
+}
+
 .profile-modal-footer {
   display: flex;
   align-items: center;

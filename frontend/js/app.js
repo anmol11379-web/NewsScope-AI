@@ -196,11 +196,22 @@ function openProfileModal() {
     emailEl.textContent = user.email || 'Not provided';
   }
 
-  // 4. Phone Number as empty
+  // 4. Phone Number
   if (phoneEl) {
-    phoneEl.textContent = 'Empty';
-    phoneEl.className = 'profile-info-val empty';
+    if (user.phone && user.phone.trim()) {
+      phoneEl.textContent = user.phone.trim();
+      phoneEl.className = 'profile-info-val';
+    } else {
+      phoneEl.textContent = 'Empty';
+      phoneEl.className = 'profile-info-val empty';
+    }
   }
+
+  // Ensure edit mode is closed on opening
+  const phoneDisplayWrap = document.getElementById('profile-phone-display-wrap');
+  const phoneEditWrap = document.getElementById('profile-phone-edit-wrap');
+  if (phoneDisplayWrap) phoneDisplayWrap.style.display = 'flex';
+  if (phoneEditWrap) phoneEditWrap.style.display = 'none';
 
   modalBackdrop.classList.add('active');
 }
@@ -259,6 +270,70 @@ function setupUserControls() {
   const modalFooterCloseBtn = document.getElementById('profile-modal-close-btn');
   if (modalFooterCloseBtn) {
     modalFooterCloseBtn.addEventListener('click', closeProfileModal);
+  }
+
+  // Pencil button to add/edit phone number
+  const pencilBtn = document.getElementById('profile-pencil-btn');
+  const phoneDisplayWrap = document.getElementById('profile-phone-display-wrap');
+  const phoneEditWrap = document.getElementById('profile-phone-edit-wrap');
+  const phoneInput = document.getElementById('profile-phone-input');
+  const phoneSaveBtn = document.getElementById('profile-phone-save-btn');
+  const phoneCancelBtn = document.getElementById('profile-phone-cancel-btn');
+  const phoneEl = document.getElementById('profile-modal-phone');
+
+  if (pencilBtn && phoneEditWrap && phoneDisplayWrap && phoneInput) {
+    pencilBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const user = getUser() || {};
+      phoneInput.value = user.phone || '';
+      phoneDisplayWrap.style.display = 'none';
+      phoneEditWrap.style.display = 'block';
+      phoneInput.focus();
+    });
+
+    const savePhone = () => {
+      const val = phoneInput.value.trim();
+      const user = getUser() || {};
+      user.phone = val;
+      saveUser(user);
+
+      if (val) {
+        phoneEl.textContent = val;
+        phoneEl.className = 'profile-info-val';
+      } else {
+        phoneEl.textContent = 'Empty';
+        phoneEl.className = 'profile-info-val empty';
+      }
+
+      phoneEditWrap.style.display = 'none';
+      phoneDisplayWrap.style.display = 'flex';
+    };
+
+    if (phoneSaveBtn) {
+      phoneSaveBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        savePhone();
+      });
+    }
+
+    phoneInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        savePhone();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        phoneEditWrap.style.display = 'none';
+        phoneDisplayWrap.style.display = 'flex';
+      }
+    });
+
+    if (phoneCancelBtn) {
+      phoneCancelBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        phoneEditWrap.style.display = 'none';
+        phoneDisplayWrap.style.display = 'flex';
+      });
+    }
   }
 
   // Backdrop click to close profile modal
