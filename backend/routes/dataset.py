@@ -4,10 +4,32 @@ Provides access to the News Validity Benchmark Dataset, search, and statistics.
 """
 
 from typing import Optional
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, Query, HTTPException, BackgroundTasks
 from backend.services.dataset_service import dataset_service
+from backend.services.kaggle_service import kaggle_sync_service
 
 router = APIRouter(prefix="/api/dataset", tags=["Dataset"])
+
+@router.post("/sync")
+def trigger_sync(background_tasks: BackgroundTasks, max_items: int = Query(500, ge=50, le=5000), force: bool = Query(False)):
+    """Triggers an asynchronous sync with Kaggle self-updating news dataset."""
+    if kaggle_sync_service.is_syncing:
+        return {"status": "in_progress", "message": "Dataset sync is already running."}
+    
+    background_tasks.add_task(kaggle_sync_service.sync, max_items=max_items, force_download=force)
+    return {
+        "status": "started",
+        "message": f"Sync started for Kaggle dataset: {kaggle_sync_service.dataset_slug}",
+        "max_items": max_items,
+        "force_download": force
+    }
+
+
+@router.get("/sync/status")
+def get_sync_status():
+    """Returns the current status, last sync timestamp, and last error of Kaggle sync."""
+    return kaggle_sync_service.get_status()
+
 
 @router.get("")
 def list_dataset(

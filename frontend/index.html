@@ -224,7 +224,18 @@
 
         <!-- Footer / User -->
         <div class="sidebar-footer">
+          <div style="padding: 4px 6px 8px 6px;">
+            <button id="sidebar-dataset-btn" class="btn-ghost" style="width: 100%; display: flex; align-items: center; gap: 8px; justify-content: flex-start; padding: 7px 10px; font-size: var(--font-xs); color: var(--text-secondary); border-radius: var(--radius-md); cursor: pointer; border: 1px solid var(--border-subtle); background: var(--glass-bg);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+              </svg>
+              <span>News Dataset & Kaggle</span>
+            </button>
+          </div>
           <div class="sidebar-user">
+
             <div class="avatar">DU</div>
             <div class="sidebar-user-info">
               <div class="sidebar-user-name">Demo User</div>
@@ -253,6 +264,14 @@
             </div>
           </div>
           <div class="topbar-right">
+            <button class="btn-icon tooltip" id="dataset-modal-btn" data-tooltip="Benchmark Dataset & Kaggle Feed" aria-label="Open dataset modal">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+              </svg>
+            </button>
             <button class="btn-icon tooltip" id="theme-toggle" data-tooltip="Light mode" aria-label="Toggle theme">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -399,6 +418,63 @@
           </div>
           <div class="input-disclaimer">NewsScope AI can make mistakes. Always verify important information with primary
             sources.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         DATASET EXPLORER MODAL
+         ════════════════════════════════════════════════════ -->
+    <div id="dataset-modal-backdrop" class="dataset-modal-backdrop">
+      <div class="dataset-modal" role="dialog" aria-modal="true" aria-labelledby="dataset-modal-title">
+        <!-- Header -->
+        <div class="dataset-modal-header">
+          <div class="dataset-modal-header-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+            <h2 id="dataset-modal-title">News Validity Benchmark & Live Kaggle Feed</h2>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button id="dataset-sync-btn" class="btn-secondary" style="font-size: var(--font-xs); padding: 5px 12px; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; border-radius: var(--radius-md); font-weight: var(--font-weight-medium);">
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+              </svg>
+              Sync Kaggle News
+            </button>
+            <button class="btn-icon" id="dataset-modal-close" aria-label="Close modal">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="dataset-modal-stats-bar" id="dataset-stats-bar">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="dataset-search-bar">
+          <input type="text" id="dataset-search-input" class="dataset-search-input" placeholder="Search claims, headlines, tags, topics..." aria-label="Search dataset" />
+          <div class="dataset-category-chips" id="dataset-category-chips">
+            <button class="category-chip active" data-category="all">All</button>
+            <button class="category-chip" data-category="World & Geopolitics">World</button>
+            <button class="category-chip" data-category="Science & Health">Science & Health</button>
+            <button class="category-chip" data-category="Technology & AI">Tech & AI</button>
+            <button class="category-chip" data-category="Economy & Finance">Economy</button>
+            <button class="category-chip" data-category="Politics & Elections">Politics</button>
+            <button class="category-chip" data-category="Entertainment & Media">Entertainment</button>
+          </div>
+        </div>
+
+        <!-- Items List -->
+        <div class="dataset-items-list" id="dataset-items-list">
+          <!-- Dynamically rendered -->
         </div>
       </div>
     </div>

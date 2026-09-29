@@ -1,0 +1,1238 @@
+[
+  {
+    "id": "NEWS-001",
+    "category": "Science & Health",
+    "headline": "James Webb Space Telescope detects definitive chemical biosignatures of intelligent life on K2-18b",
+    "claim": "The James Webb Space Telescope confirmed definitive proof of intelligent alien civilization on exoplanet K2-18b.",
+    "verdict": "Likely Misleading",
+    "verdict_class": "badge-fake",
+    "credibility_score": 28,
+    "bias_rating": "Sensationalist",
+    "fact_checker": "Reuters Fact Check",
+    "verification_date": "2024-04-18",
+    "sources": [
+      "NASA Webb Mission Updates — Official statement clarifying dimethyl sulfide detection is unconfirmed",
+      "Nature Astronomy — Discussion of spectroscopic uncertainty in K2-18b observations",
+      "Astrophysical Journal Letters — Peer-reviewed planetary atmospheric models"
+    ],
+    "detailed_analysis": "While JWST did observe methane and carbon dioxide with potential hints of dimethyl sulfide (DMS) on K2-18b, NASA scientists explicitly stated this does not constitute definitive proof of alien life or intelligent civilization. Further observations are required.",
+    "tags": [
+      "space",
+      "jwst",
+      "exoplanet",
+      "astronomy",
+      "nasa"
+    ]
+  },
+  {
+    "id": "NEWS-002",
+    "category": "Science & Health",
+    "headline": "WHO declares mpox public health emergency of international concern",
+    "claim": "World Health Organization declared the mpox surge in Africa a Public Health Emergency of International Concern (PHEIC).",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 96,
+    "bias_rating": "Neutral",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-08-14",
+    "sources": [
+      "World Health Organization (WHO) — Official Director-General Declaration",
+      "Africa CDC — Epidemic surveillance weekly bulletin",
+      "The Lancet Infectious Diseases — Clade Ib transmission data"
+    ],
+    "detailed_analysis": "WHO Director-General Tedros Adhanom Ghebreyesus officially determined that the upsurge of mpox in the Democratic Republic of the Congo and neighboring countries constituted a PHEIC under the International Health Regulations.",
+    "tags": [
+      "who",
+      "health",
+      "mpox",
+      "epidemiology",
+      "global-health"
+    ]
+  },
+  {
+    "id": "NEWS-003",
+    "category": "Science & Health",
+    "headline": "Drinking boiled lemon water with baking soda cures Stage 4 cancer in 48 hours",
+    "claim": "A simple homemade concoction of lemon water and baking soda eliminates advanced cancer cells in two days.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 5,
+    "bias_rating": "Dangerous Medical Misinformation",
+    "fact_checker": "FactCheck.org",
+    "verification_date": "2024-01-20",
+    "sources": [
+      "American Cancer Society — Debunking alkaline diet cancer cure myths",
+      "National Cancer Institute — Clinical oncology evidence repository",
+      "Memorial Sloan Kettering Cancer Center — Integrative medicine fact sheets"
+    ],
+    "detailed_analysis": "There is zero clinical or scientific evidence that lemon juice or sodium bicarbonate can cure cancer. Such viral hoaxes are medically hazardous as they can cause patients to abandon life-saving conventional treatments.",
+    "tags": [
+      "cancer-cure",
+      "hoax",
+      "medical-myth",
+      "health-misinformation"
+    ]
+  },
+  {
+    "id": "NEWS-004",
+    "category": "Science & Health",
+    "headline": "FDA approves first CRISPR gene-editing therapy for sickle cell disease",
+    "claim": "The US Food and Drug Administration approved Casgevy, the first medicine utilizing CRISPR/Cas9 genome editing for sickle cell disease.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 98,
+    "bias_rating": "Neutral",
+    "fact_checker": "Reuters Fact Check",
+    "verification_date": "2023-12-08",
+    "sources": [
+      "FDA News Release — FDA Approves First Gene Therapies to Treat Patients with Sickle Cell Disease",
+      "New England Journal of Medicine — CRISPR-Cas9 Gene Editing for Sickle Cell Disease Phase 3 Trial",
+      "Vertex Pharmaceuticals & CRISPR Therapeutics official disclosures"
+    ],
+    "detailed_analysis": "The landmark approval was granted for Casgevy (exagamglogene autotemcel) developed by Vertex Pharmaceuticals and CRISPR Therapeutics for patients 12 years and older with recurrent vaso-occlusive crises.",
+    "tags": [
+      "fda",
+      "crispr",
+      "genetics",
+      "sickle-cell",
+      "biotech"
+    ]
+  },
+  {
+    "id": "NEWS-005",
+    "category": "Science & Health",
+    "headline": "Dental floss contains lethal quantities of PFAS chemicals that poison blood within minutes",
+    "claim": "Routine use of dental floss causes acute, lethal PFAS poison levels in the human bloodstream.",
+    "verdict": "Likely Misleading",
+    "verdict_class": "badge-fake",
+    "credibility_score": 32,
+    "bias_rating": "Sensationalist Fearmongering",
+    "fact_checker": "Snopes",
+    "verification_date": "2024-05-11",
+    "sources": [
+      "American Dental Association (ADA) — Statement on PTFE Floss and Fluorinated Compounds",
+      "Silent Spring Institute — Exposure studies on consumer products",
+      "EPA Guidelines on Per- and Polyfluoroalkyl Substances"
+    ],
+    "detailed_analysis": "While some Teflon-coated flosses contain trace PTFE (a type of fluoropolymer), rigorous peer-reviewed toxicological assessments found no evidence of acute toxicity or lethal blood concentration spikes from daily flossing.",
+    "tags": [
+      "pfas",
+      "dental-floss",
+      "toxicology",
+      "health"
+    ]
+  },
+  {
+    "id": "NEWS-006",
+    "category": "Technology & AI",
+    "headline": "Deepfake audio of CEO results in $25 million wire transfer fraud at multinational firm",
+    "claim": "Scammers used AI deepfake voice and video technology during a video conference to trick a finance employee in Hong Kong into transferring $25M.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 94,
+    "bias_rating": "Neutral",
+    "fact_checker": "BBC News",
+    "verification_date": "2024-02-05",
+    "sources": [
+      "Hong Kong Police Force Cyber Security and Technology Crime Bureau Briefing",
+      "South China Morning Post — Investigative report on multinational deepfake heist",
+      "Reuters Technology Investigation"
+    ],
+    "detailed_analysis": "Hong Kong police confirmed that cybercriminals deployed multi-person deepfake avatars and synthetic voice clones replicating the company's UK chief financial officer and colleagues during an elaborate multi-party video call.",
+    "tags": [
+      "deepfake",
+      "cybersecurity",
+      "fraud",
+      "ai",
+      "crime"
+    ]
+  },
+  {
+    "id": "NEWS-007",
+    "category": "Technology & AI",
+    "headline": "OpenAI announces GPT-5 will gain sentient consciousness and replace all world governments by 2026",
+    "claim": "OpenAI released a formal manifesto stating GPT-5 achieves sentience and will govern world states.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 2,
+    "bias_rating": "Clickbait Satire / Parody",
+    "fact_checker": "PolitiFact",
+    "verification_date": "2024-06-12",
+    "sources": [
+      "OpenAI Official Blog & Press Releases — No such announcement exists",
+      "Associated Press Fact Check Archive",
+      "Snopes Digital Culture Verification"
+    ],
+    "detailed_analysis": "The claim originated from a satirical social media post spoofing tech conference announcements. OpenAI executives have repeatedly clarified that AI models are statistical prediction engines without consciousness or political authority.",
+    "tags": [
+      "openai",
+      "gpt5",
+      "agi",
+      "satire",
+      "ai-hoax"
+    ]
+  },
+  {
+    "id": "NEWS-008",
+    "category": "Technology & AI",
+    "headline": "European Union passes the world's first comprehensive AI Act regulating high-risk artificial intelligence",
+    "claim": "The European Parliament approved the EU Artificial Intelligence Act establishing risk-based regulations for AI systems.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 97,
+    "bias_rating": "Neutral",
+    "fact_checker": "AP News",
+    "verification_date": "2024-03-13",
+    "sources": [
+      "European Parliament Legislative Observatory — Artificial Intelligence Act (2021/0106(COD))",
+      "Council of the European Union Press Release",
+      "Financial Times — Regulatory analysis of global tech implications"
+    ],
+    "detailed_analysis": "The EU AI Act was overwhelmingly approved with 523 votes in favor, banning unacceptable risk systems like social scoring and imposing strict governance rules on high-risk AI and general-purpose foundation models.",
+    "tags": [
+      "eu-ai-act",
+      "legislation",
+      "tech-policy",
+      "regulation"
+    ]
+  },
+  {
+    "id": "NEWS-009",
+    "category": "Technology & AI",
+    "headline": "Viral photo shows Pope Francis wearing a luxury Balenciaga white puffer jacket at the Vatican",
+    "claim": "A real photograph captured Pope Francis walking through Rome in a designer white Balenciaga puffer coat.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 8,
+    "bias_rating": "Synthetic Media Hoax",
+    "fact_checker": "Snopes",
+    "verification_date": "2023-03-27",
+    "sources": [
+      "Vatican Press Office Official Schedule & Imagery",
+      "Midjourney Prompt Creator Interview via Buzzfeed News",
+      "PolitiFact Verification Report"
+    ],
+    "detailed_analysis": "The viral image was generated using Midjourney v5 by an artist in Chicago and was not a real photograph. Key visual artifacts such as distorted hand geometry and blurred crucifix details confirm it was AI-generated.",
+    "tags": [
+      "pope-balenciaga",
+      "midjourney",
+      "deepfake-image",
+      "vatican"
+    ]
+  },
+  {
+    "id": "NEWS-010",
+    "category": "Technology & AI",
+    "headline": "Quantum computer breaks standard 2048-bit RSA encryption in 30 seconds",
+    "claim": "A functional quantum computer successfully decrypted military-grade RSA-2048 encryption keys in under a minute.",
+    "verdict": "Likely Misleading",
+    "verdict_class": "badge-fake",
+    "credibility_score": 25,
+    "bias_rating": "Sensationalist Tech Hype",
+    "fact_checker": "IEEE Spectrum Fact Check",
+    "verification_date": "2024-07-02",
+    "sources": [
+      "NIST Post-Quantum Cryptography Standardization Report",
+      "IBM Quantum Systems Research Documentation",
+      "Schneier on Security Cryptographic Review"
+    ],
+    "detailed_analysis": "Current noisy intermediate-scale quantum (NISQ) computers possess far too few fault-tolerant logical qubits to execute Shor's algorithm on 2048-bit keys. While research advances, breaking RSA-2048 remains theoretically estimated to require thousands of error-corrected qubits.",
+    "tags": [
+      "quantum-computing",
+      "rsa",
+      "cryptography",
+      "nist",
+      "cybersecurity"
+    ]
+  },
+  {
+    "id": "NEWS-011",
+    "category": "Politics & Elections",
+    "headline": "United Nations announces global treaty establishing compulsory digital biometric passports for all internet users",
+    "claim": "The UN passed a binding resolution requiring all citizens to provide retinal biometric data before accessing social media.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 4,
+    "bias_rating": "Conspiracy Framing",
+    "fact_checker": "Reuters Fact Check",
+    "verification_date": "2024-05-19",
+    "sources": [
+      "United Nations General Assembly Voting Records & Documentation",
+      "International Telecommunication Union (ITU) charters",
+      "PolitiFact Global Politics Fact Check"
+    ],
+    "detailed_analysis": "No such UN resolution or treaty exists. The claim misrepresents exploratory policy papers discussing digital public infrastructure and identity development goals, none of which propose biometric internet gating.",
+    "tags": [
+      "un",
+      "biometrics",
+      "conspiracy",
+      "digital-id",
+      "censorship"
+    ]
+  },
+  {
+    "id": "NEWS-012",
+    "category": "Politics & Elections",
+    "headline": "Sweden formally joins NATO as 32nd member following Hungarian ratification",
+    "claim": "Sweden officially completed the accession process to become the 32nd member state of the North Atlantic Treaty Organization.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 99,
+    "bias_rating": "Neutral",
+    "fact_checker": "AP News",
+    "verification_date": "2024-03-07",
+    "sources": [
+      "NATO Official Press Release — Sweden officially joins NATO",
+      "U.S. Department of State Treaty Deposit Registry",
+      "Government Offices of Sweden Official Communique"
+    ],
+    "detailed_analysis": "Swedish Prime Minister Ulf Kristersson deposited the instrument of accession with the United States government in Washington, ending over 200 years of military non-alignment.",
+    "tags": [
+      "nato",
+      "sweden",
+      "geopolitics",
+      "defense",
+      "international-relations"
+    ]
+  },
+  {
+    "id": "NEWS-013",
+    "category": "Politics & Elections",
+    "headline": "Election ballot sorting machine in swing district programmed to flip votes between candidates automatically",
+    "claim": "Leaked source code proves Dominion voting machines alter 15% of ballots to favor a predetermined political candidate.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 6,
+    "bias_rating": "Partisan Misinformation",
+    "fact_checker": "FactCheck.org",
+    "verification_date": "2024-09-02",
+    "sources": [
+      "U.S. Cybersecurity and Infrastructure Security Agency (CISA) Joint Statement",
+      "Georgia Secretary of State Hand-Count Audit Reports",
+      "Court filings & settlements in Dominion Voting Systems v. Fox News Network"
+    ],
+    "detailed_analysis": "Extensive forensic audits, bipartisan risk-limiting manual hand recounts, and rigorous testing by federal and state election boards have debunked claims of systemic vote-flipping code algorithms.",
+    "tags": [
+      "elections",
+      "voting-machines",
+      "conspiracy",
+      "cisa"
+    ]
+  },
+  {
+    "id": "NEWS-014",
+    "category": "Politics & Elections",
+    "headline": "International Criminal Court issues arrest warrant for Israeli Prime Minister Benjamin Netanyahu and defense officials",
+    "claim": "ICC Chief Prosecutor Karim Khan applied for and the ICC Pre-Trial Chamber considered arrest warrants regarding the Gaza conflict.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 93,
+    "bias_rating": "Neutral",
+    "fact_checker": "BBC News",
+    "verification_date": "2024-05-20",
+    "sources": [
+      "International Criminal Court (ICC) — Statement of ICC Prosecutor Karim A.A. Khan KC",
+      "United Nations Press Briefing on International Legal Precedents",
+      "Haaretz & Reuters International Law Coverage"
+    ],
+    "detailed_analysis": "ICC Prosecutor Karim Khan publicly filed applications for arrest warrants before Pre-Trial Chamber I against Benjamin Netanyahu, Yoav Gallant, and leaders of Hamas for war crimes and crimes against humanity.",
+    "tags": [
+      "icc",
+      "israel",
+      "gaza",
+      "middle-east",
+      "international-law"
+    ]
+  },
+  {
+    "id": "NEWS-015",
+    "category": "Politics & Elections",
+    "headline": "US Congress quietly passed law making it a federal felony to criticize the national flag on social media",
+    "claim": "A newly enacted bipartisan bill penalizes negative social media posts about the American flag with up to 5 years imprisonment.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 3,
+    "bias_rating": "Outrage Clickbait",
+    "fact_checker": "PolitiFact",
+    "verification_date": "2024-07-15",
+    "sources": [
+      "Congress.gov Legislative Database — No such statute introduced or passed",
+      "U.S. Supreme Court Precedent — Texas v. Johnson (1989) First Amendment protections",
+      "Congressional Research Service Legal Summaries"
+    ],
+    "detailed_analysis": "No such legislation was passed. The U.S. Supreme Court firmly established in Texas v. Johnson and United States v. Eichman that speech regarding national symbols is protected under the First Amendment.",
+    "tags": [
+      "first-amendment",
+      "congress",
+      "flag-desecration",
+      "constitutional-law"
+    ]
+  },
+  {
+    "id": "NEWS-016",
+    "category": "Climate & Environment",
+    "headline": "Copernicus Climate Change Service confirms 2024 set record as hottest year in recorded history",
+    "claim": "Global climate data confirmed 2024 was the warmest year globally, exceeding previous temperature records set in 2023.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 96,
+    "bias_rating": "Neutral",
+    "fact_checker": "Reuters Fact Check",
+    "verification_date": "2025-01-09",
+    "sources": [
+      "Copernicus Climate Change Service (C3S) / ECMWF Annual Global Climate Highlights",
+      "NOAA National Centers for Environmental Information Global Climate Report",
+      "World Meteorological Organization (WMO) State of the Global Climate"
+    ],
+    "detailed_analysis": "Copernicus, NOAA, and NASA meteorological datasets corroborated that global mean surface air temperatures broke historical thresholds driven by anthropogenic greenhouse emissions and strong El Niño dynamics.",
+    "tags": [
+      "climate-change",
+      "global-warming",
+      "copernicus",
+      "noaa",
+      "temperatures"
+    ]
+  },
+  {
+    "id": "NEWS-017",
+    "category": "Climate & Environment",
+    "headline": "Government secretly engineered Hurricane Milton using HAARP radar antennas in Alaska",
+    "claim": "The High-frequency Active Auroral Research Program (HAARP) generated and steered hurricanes toward Florida.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 3,
+    "bias_rating": "Conspiracy Theory",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-10-09",
+    "sources": [
+      "University of Alaska Fairbanks HAARP Research Facility Technical Documentation",
+      "National Hurricane Center (NHC) Tropical Meteorology Explanations",
+      "American Meteorological Society (AMS) Statements on Weather Manipulation"
+    ],
+    "detailed_analysis": "HAARP is an ionospheric research instrument with radio transmitter energy far below atmospheric scales. Tropical cyclones are driven by massive thermodynamic ocean heat content, not radio wave manipulation.",
+    "tags": [
+      "hurricanes",
+      "haarp",
+      "weather-modification",
+      "conspiracy",
+      "meteorology"
+    ]
+  },
+  {
+    "id": "NEWS-018",
+    "category": "Climate & Environment",
+    "headline": "Renewable energy provided over 30% of global electricity generation for the first time in 2023",
+    "claim": "Global clean energy report showed wind, solar, and other renewables surpassed 30% of total world power production.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 92,
+    "bias_rating": "Neutral",
+    "fact_checker": "Bloomberg Green",
+    "verification_date": "2024-05-08",
+    "sources": [
+      "Ember Global Electricity Review 2024",
+      "International Energy Agency (IEA) World Energy Outlook",
+      "Renewables Global Status Report (REN21)"
+    ],
+    "detailed_analysis": "Ember's comprehensive analysis covering 80 countries representing 92% of world electricity demand confirmed renewables supplied 30.3% of global electricity in 2023, primarily led by rapid solar and wind capacity expansion.",
+    "tags": [
+      "renewables",
+      "solar-energy",
+      "wind-power",
+      "iea",
+      "clean-tech"
+    ]
+  },
+  {
+    "id": "NEWS-019",
+    "category": "Climate & Environment",
+    "headline": "Undersea volcanic eruption in Tonga caused all global warming observed since 2022, disproving carbon theory",
+    "claim": "The Hunga Tonga volcano single-handedly caused all recent atmospheric warming, proving greenhouse gases have no effect.",
+    "verdict": "Likely Misleading",
+    "verdict_class": "badge-fake",
+    "credibility_score": 35,
+    "bias_rating": "Climate Denial Framing",
+    "fact_checker": "Climate Feedback / Science Feedback",
+    "verification_date": "2024-03-15",
+    "sources": [
+      "Nature Geoscience — Radiative forcing of the Hunga Tonga-Hunga Ha'apai eruption",
+      "IPCC Sixth Assessment Report (AR6) Synthesis",
+      "NASA Earth Observatory Atmospheric Water Vapor Observations"
+    ],
+    "detailed_analysis": "While the Hunga Tonga eruption injected water vapor into the stratosphere that contributed a temporary and minor warming perturbation (+0.03°C to +0.05°C), peer-reviewed research shows long-term global warming trends are overwhelmingly driven by accumulated carbon dioxide emissions.",
+    "tags": [
+      "volcano",
+      "hunga-tonga",
+      "climate-denial",
+      "greenhouse-effect"
+    ]
+  },
+  {
+    "id": "NEWS-020",
+    "category": "Economy & Finance",
+    "headline": "US SEC approves 11 spot Bitcoin exchange-traded funds (ETFs) in historic regulatory shift",
+    "claim": "The Securities and Exchange Commission formally granted approval for spot Bitcoin ETFs to trade on major US exchanges.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 98,
+    "bias_rating": "Neutral",
+    "fact_checker": "Wall Street Journal",
+    "verification_date": "2024-01-10",
+    "sources": [
+      "U.S. Securities and Exchange Commission (SEC) Order Granting Accelerated Approval (Release No. 34-99306)",
+      "SEC Chairman Gary Gensler Public Statement",
+      "New York Stock Exchange & Cboe Official Filings"
+    ],
+    "detailed_analysis": "Following a pivotal DC Circuit court ruling, the SEC approved applications from BlackRock, Fidelity, Ark Invest, and other asset managers, marking a major milestone for cryptocurrency integration into mainstream financial markets.",
+    "tags": [
+      "bitcoin",
+      "sec",
+      "crypto-etf",
+      "finance",
+      "blackrock"
+    ]
+  },
+  {
+    "id": "NEWS-021",
+    "category": "Economy & Finance",
+    "headline": "Federal Reserve executive order bans all physical cash transactions over $50 starting next month",
+    "claim": "The US government outlawed cash payments exceeding fifty dollars to force adoption of a government digital dollar.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 4,
+    "bias_rating": "Financial Fearmongering",
+    "fact_checker": "Snopes",
+    "verification_date": "2024-06-25",
+    "sources": [
+      "Federal Reserve Board of Governors Regulations & Bulletins",
+      "U.S. Code Title 31 § 5103 — Legal Tender Statutes",
+      "PolitiFact Finance & Banking Verification"
+    ],
+    "detailed_analysis": "Federal law explicitly establishes United States coins and currency as legal tender. Neither the President nor the Federal Reserve has issued an order capping or criminalizing physical cash payments.",
+    "tags": [
+      "cash-ban",
+      "federal-reserve",
+      "cbdc",
+      "banking-hoax"
+    ]
+  },
+  {
+    "id": "NEWS-022",
+    "category": "Economy & Finance",
+    "headline": "Elon Musk launches quantum automated investment trading app guaranteeing $5,000 daily profits",
+    "claim": "Elon Musk appeared in a televised interview endorsing an algorithmic trading program that promises guaranteed passive returns.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 2,
+    "bias_rating": "Investment Scam / Deepfake",
+    "fact_checker": "Reuters Fact Check",
+    "verification_date": "2024-08-01",
+    "sources": [
+      "FTC Consumer Advice Warnings on Deepfake Investment Scams",
+      "Tesla & X Corporate Communications",
+      "Better Business Bureau Scam Tracker"
+    ],
+    "detailed_analysis": "The video is an AI-manipulated deepfake that spliced authentic TV news interviews with lip-synced audio clones to funnel victims into cryptocurrency investment theft operations.",
+    "tags": [
+      "elon-musk",
+      "crypto-scam",
+      "deepfake-ad",
+      "financial-fraud"
+    ]
+  },
+  {
+    "id": "NEWS-023",
+    "category": "Economy & Finance",
+    "headline": "Federal Reserve cuts interest rates by 50 basis points in first easing cycle since 2020",
+    "claim": "The US Federal Open Market Committee lowered the federal funds target rate to a range of 4.75% to 5.00%.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 98,
+    "bias_rating": "Neutral",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-09-18",
+    "sources": [
+      "Federal Reserve FOMC Policy Statement September 2024",
+      "Chair Jerome H. Powell Press Conference Transcript",
+      "Federal Reserve Economic Data (FRED) Official Index"
+    ],
+    "detailed_analysis": "In a 11-to-1 vote, the Federal Reserve initiated monetary easing with a half-percentage point reduction in borrowing costs as inflation moderated toward its 2 percent annual target.",
+    "tags": [
+      "federal-reserve",
+      "interest-rates",
+      "inflation",
+      "economy",
+      "fomc"
+    ]
+  },
+  {
+    "id": "NEWS-024",
+    "category": "Global Affairs",
+    "headline": "Ukraine uses domestically produced aerial drones to strike Russian radar station over 1,800 km away",
+    "claim": "Ukrainian intelligence services executed a record-range drone attack targeting a long-range strategic radar in Russia's Orenburg region.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 89,
+    "bias_rating": "Slight Pro-Defense Bias",
+    "fact_checker": "Reuters Fact Check",
+    "verification_date": "2024-05-27",
+    "sources": [
+      "Main Directorate of Intelligence of the Ministry of Defence of Ukraine (GUR)",
+      "Planet Labs Satellite Imagery Corroboration",
+      "Institute for the Study of War (ISW) Russian Offensive Campaign Assessment"
+    ],
+    "detailed_analysis": "Satellite photos and Ukrainian defense sources confirmed a Voronezh-M early-warning radar facility near Orsk was damaged by long-range modified aerial drones flying over 1,800 kilometers from Ukrainian airspace.",
+    "tags": [
+      "ukraine",
+      "russia",
+      "drones",
+      "radar",
+      "military"
+    ]
+  },
+  {
+    "id": "NEWS-025",
+    "category": "Global Affairs",
+    "headline": "Panama Canal permanently closed to all international commercial shipping due to water shortages",
+    "claim": "The Panama Canal Authority permanently shut down operations for all foreign cargo vessels indefinitely.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 12,
+    "bias_rating": "Sensationalist Alarmism",
+    "fact_checker": "AP News",
+    "verification_date": "2024-04-10",
+    "sources": [
+      "Panama Canal Authority (ACP) Transit Bulletins",
+      "International Chamber of Shipping Advisory",
+      "Lloyd's List Maritime Intelligence"
+    ],
+    "detailed_analysis": "While the canal instituted temporary draft limits and restricted daily vessel slots in 2023–2024 due to drought in Gatun Lake, traffic never ceased entirely and restrictions were gradually lifted as seasonal rains returned.",
+    "tags": [
+      "panama-canal",
+      "shipping",
+      "logistics",
+      "trade-hoax"
+    ]
+  },
+  {
+    "id": "NEWS-026",
+    "category": "Global Affairs",
+    "headline": "BRICS bloc formally adopts gold-backed common reserve currency called the 'Unit' to replace US Dollar",
+    "claim": "BRICS nations officially launched a unified circulating physical and electronic currency that ended the global role of the US Dollar.",
+    "verdict": "Likely Misleading",
+    "verdict_class": "badge-fake",
+    "credibility_score": 30,
+    "bias_rating": "Sensationalist Geopolitical Spin",
+    "fact_checker": "Snopes",
+    "verification_date": "2024-10-24",
+    "sources": [
+      "16th BRICS Summit Kazan Declaration (October 2024)",
+      "Reserve Bank of India & South African Reserve Bank Policy Statements",
+      "Carnegie Endowment for International Peace Economic Briefings"
+    ],
+    "detailed_analysis": "The 2024 Kazan declaration discussed exploring local-currency settlement systems (BRICS Pay) and correspondent networks, but leaders repeatedly noted there are no plans for a shared BRICS currency due to divergent macroeconomic and fiscal regimes.",
+    "tags": [
+      "brics",
+      "currency",
+      "dedollarization",
+      "geopolitics",
+      "russia"
+    ]
+  },
+  {
+    "id": "NEWS-027",
+    "category": "Global Affairs",
+    "headline": "Taiwan Semiconductor Manufacturing Company (TSMC) opens first European chip fabrication facility in Dresden, Germany",
+    "claim": "TSMC broke ground on a €10 billion semiconductor manufacturing plant in Dresden as part of the European Chips Act initiative.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 97,
+    "bias_rating": "Neutral",
+    "fact_checker": "Bloomberg",
+    "verification_date": "2024-08-20",
+    "sources": [
+      "European Semiconductor Manufacturing Company (ESMC) Groundbreaking Press Release",
+      "European Commission State Aid Approval (IP/24/4283)",
+      "German Federal Chancellery Official Statements"
+    ],
+    "detailed_analysis": "TSMC, in joint venture with Bosch, Infineon, and NXP, formally commenced construction of the Dresden fab, backed by €5 billion in German government subsidies approved under the EU Chips Act.",
+    "tags": [
+      "tsmc",
+      "semiconductors",
+      "germany",
+      "chips-act",
+      "tech-industry"
+    ]
+  },
+  {
+    "id": "NEWS-028",
+    "category": "Viral Hoaxes & Media",
+    "headline": "Disney announces live-action film starring Ryan Gosling as Rosa Parks",
+    "claim": "Walt Disney Studios greenlit a feature biopic casting Ryan Gosling to play the civil rights icon Rosa Parks.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 1,
+    "bias_rating": "Culture War Satire / Ragebait",
+    "fact_checker": "Snopes",
+    "verification_date": "2024-03-02",
+    "sources": [
+      "The Walt Disney Company Press Releases & Film Slates",
+      "Variety & The Hollywood Reporter Production Trackers",
+      "Snopes Entertainment Fact Checks"
+    ],
+    "detailed_analysis": "The claim originated on satirical meme accounts designed to stir outrage regarding corporate casting decisions. No such project exists or was ever conceived.",
+    "tags": [
+      "disney",
+      "satire",
+      "ragebait",
+      "ryan-gosling",
+      "hollywood-hoax"
+    ]
+  },
+  {
+    "id": "NEWS-029",
+    "category": "Viral Hoaxes & Media",
+    "headline": "Eating 14 bananas in a single sitting causes fatal potassium cardiac arrest",
+    "claim": "Bananas contain so much radioactive potassium that eating more than a dozen causes immediate heart failure.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 8,
+    "bias_rating": "Sensationalist Urban Legend",
+    "fact_checker": "BBC Science Focus",
+    "verification_date": "2023-11-14",
+    "sources": [
+      "National Institutes of Health (NIH) Dietary Potassium Guidelines",
+      "Royal Society of Chemistry Toxicity Assessments",
+      "Mayo Clinic Cardiology Review"
+    ],
+    "detailed_analysis": "A healthy human body rapidly excretes excess dietary potassium through the kidneys. A person would need to ingest around 400 bananas within hours for potassium toxicity to pose a mortal threat.",
+    "tags": [
+      "bananas",
+      "potassium",
+      "urban-legend",
+      "dietary-myth"
+    ]
+  },
+  {
+    "id": "NEWS-030",
+    "category": "Viral Hoaxes & Media",
+    "headline": "Taylor Swift endorses Kamala Harris for US President following presidential debate",
+    "claim": "Pop superstar Taylor Swift publicly endorsed Vice President Kamala Harris immediately following the ABC News presidential debate.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 99,
+    "bias_rating": "Neutral",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-09-10",
+    "sources": [
+      "Taylor Swift Verified Instagram Account Statement (@taylorswift)",
+      "Associated Press Entertainment & Politics Wire",
+      "New York Times Live Debate Coverage"
+    ],
+    "detailed_analysis": "Taylor Swift posted a detailed message to her 283 million Instagram followers stating she was casting her ballot for Kamala Harris and Tim Walz, signing the post 'Childless Cat Lady'.",
+    "tags": [
+      "taylor-swift",
+      "kamala-harris",
+      "endorsement",
+      "2024-election",
+      "celebrity"
+    ]
+  },
+  {
+    "id": "NEWS-031",
+    "category": "Science & Health",
+    "headline": "Microplastics discovered in human arterial plaque linked to elevated heart attack and stroke risk",
+    "claim": "A clinical study published in the New England Journal of Medicine detected microplastics and nanoplastics in carotid artery plaque of cardiovascular patients.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 95,
+    "bias_rating": "Neutral",
+    "fact_checker": "Reuters Health",
+    "verification_date": "2024-03-06",
+    "sources": [
+      "New England Journal of Medicine (NEJM) — Microplastics and Nanoplastics in Atheromas and Cardiovascular Events",
+      "National Institute of Environmental Health Sciences (NIEHS) Briefing",
+      "American Heart Association Scientific Commentary"
+    ],
+    "detailed_analysis": "The prospective multi-center Italian study analyzed 257 patients undergoing carotid endarterectomy, detecting polyethylene and polyvinyl chloride particles in 58% of patients, who suffered significantly higher rates of myocardial infarction or death.",
+    "tags": [
+      "microplastics",
+      "cardiovascular",
+      "nejm",
+      "public-health",
+      "nanoplastics"
+    ]
+  },
+  {
+    "id": "NEWS-032",
+    "category": "Technology & AI",
+    "headline": "Self-driving robotaxi runs over child after software categorizes them as trash bag",
+    "claim": "An autonomous Waymo vehicle struck and killed an infant because its perception model misidentified the child as debris.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 4,
+    "bias_rating": "Fabricated Viral Scare",
+    "fact_checker": "PolitiFact",
+    "verification_date": "2024-06-18",
+    "sources": [
+      "National Highway Traffic Safety Administration (NHTSA) Incident Database",
+      "San Francisco Police Department Traffic Collision Reports",
+      "Waymo Autonomous Safety Public Records"
+    ],
+    "detailed_analysis": "No such fatality occurred. The claim originated from an anonymous anti-tech thread on Reddit and was subsequently amplified with fabricated screenshots of news banners.",
+    "tags": [
+      "waymo",
+      "robotaxi",
+      "autonomous-vehicles",
+      "tech-scare",
+      "hoax"
+    ]
+  },
+  {
+    "id": "NEWS-033",
+    "category": "Politics & Elections",
+    "headline": "US Supreme Court rules former presidents have broad immunity from criminal prosecution for official acts",
+    "claim": "The Supreme Court held that presidents possess absolute immunity for core constitutional duties and presumptive immunity for all official acts.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 98,
+    "bias_rating": "Neutral",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-07-01",
+    "sources": [
+      "Supreme Court of the United States — Trump v. United States (No. 23-939)",
+      "SCOTUSblog Analysis & Opinion Breakdown",
+      "Department of Justice Office of Legal Counsel Guidelines"
+    ],
+    "detailed_analysis": "In a 6-3 ruling written by Chief Justice John Roberts, the Court established landmark presidential immunity principles distinguishing between official constitutional actions, outer boundary official duties, and unofficial private conduct.",
+    "tags": [
+      "scotus",
+      "presidential-immunity",
+      "constitution",
+      "trump-v-us",
+      "legal"
+    ]
+  },
+  {
+    "id": "NEWS-034",
+    "category": "Climate & Environment",
+    "headline": "World's largest coral reef restoration project achieves 90% coral cover in degraded sections of Great Barrier Reef",
+    "claim": "Scientists used automated larval bot seeding to completely restore 90% of the Great Barrier Reef.",
+    "verdict": "Partially Accurate",
+    "verdict_class": "badge-suspicious",
+    "credibility_score": 58,
+    "bias_rating": "Exaggerated Science PR",
+    "fact_checker": "Australian Associated Press (AAP) FactCheck",
+    "verification_date": "2024-02-28",
+    "sources": [
+      "Australian Institute of Marine Science (AIMS) Annual Long-Term Monitoring Report",
+      "Great Barrier Reef Marine Park Authority (GBRMPA) Condition Update",
+      "Frontiers in Marine Science Publication"
+    ],
+    "detailed_analysis": "While targeted larval seeding and nursery outplanting projects showed strong localized settlement rates at small test plots, claims that 90% of the 2,300 km reef has been restored grossly extrapolate small-scale trial data. Coral bleaching remains a severe systemic threat.",
+    "tags": [
+      "coral-reef",
+      "great-barrier-reef",
+      "marine-biology",
+      "restoration",
+      "ecology"
+    ]
+  },
+  {
+    "id": "NEWS-035",
+    "category": "Economy & Finance",
+    "headline": "Nvidia briefly becomes most valuable publicly traded company in the world, surpassing Microsoft and Apple",
+    "claim": "Chipmaker Nvidia reached a market capitalization above $3.33 trillion, briefly capturing the global top valuation ranking.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 99,
+    "bias_rating": "Neutral",
+    "fact_checker": "Reuters",
+    "verification_date": "2024-06-18",
+    "sources": [
+      "Nasdaq Stock Market Trading Data",
+      "Bloomberg Billionaires & Market Indices",
+      "Wall Street Journal Financial Markets Desk"
+    ],
+    "detailed_analysis": "Surging enterprise demand for Nvidia's H100 and Blackwell AI GPUs propelled Nvidia's stock up more than 170% in 2024, momentarily putting its market cap ahead of Microsoft ($3.32T) and Apple ($3.28T).",
+    "tags": [
+      "nvidia",
+      "stock-market",
+      "ai-hardware",
+      "market-cap",
+      "semiconductors"
+    ]
+  },
+  {
+    "id": "NEWS-036",
+    "category": "Science & Health",
+    "headline": "5G cell towers emit millimeter waves that directly cause COVID-19 mutations and respiratory breakdown",
+    "claim": "Wireless 5G radiation weakens human lung cells and creates viral pandemic infections.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 2,
+    "bias_rating": "Conspiracy Pseudo-Science",
+    "fact_checker": "FactCheck.org",
+    "verification_date": "2023-09-12",
+    "sources": [
+      "Federal Communications Commission (FCC) Radio Frequency Safety Guide",
+      "World Health Organization Electromagnetic Fields and Public Health",
+      "International Commission on Non-Ionizing Radiation Protection (ICNIRP)"
+    ],
+    "detailed_analysis": "Radio frequencies are non-ionizing radiation incapable of breaking chemical bonds or creating viral biological pathogens. COVID-19 is an infectious disease caused by the SARS-CoV-2 airborne virus.",
+    "tags": [
+      "5g",
+      "telecom",
+      "covid-conspiracy",
+      "health-myth"
+    ]
+  },
+  {
+    "id": "NEWS-037",
+    "category": "Technology & AI",
+    "headline": "CrowdStrike software update causes unprecedented worldwide IT outage grounding flights and halting hospitals",
+    "claim": "A defective Falcon sensor update caused 8.5 million Windows systems to crash with Blue Screen of Death (BSOD).",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 99,
+    "bias_rating": "Neutral",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-07-19",
+    "sources": [
+      "CrowdStrike Falcon Sensor Channel File 291 Technical Root Cause Analysis",
+      "Microsoft Official Blog — Helping Customers Through the CrowdStrike Outage",
+      "Federal Aviation Administration (FAA) Air Traffic Status Reports"
+    ],
+    "detailed_analysis": "A logic flaw in CrowdStrike's rapid response content update triggered an out-of-bounds memory read error in the Windows kernel, paralyzing commercial aviation, healthcare records, banks, and broadcasts globally.",
+    "tags": [
+      "crowdstrike",
+      "cybersecurity",
+      "it-outage",
+      "windows",
+      "tech-crisis"
+    ]
+  },
+  {
+    "id": "NEWS-038",
+    "category": "Politics & Elections",
+    "headline": "US House of Representatives passes bill to ban TikTok unless ByteDance divests US operations",
+    "claim": "The Protecting Americans from Foreign Adversary Controlled Applications Act was enacted and signed into law by President Biden.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 98,
+    "bias_rating": "Neutral",
+    "fact_checker": "Reuters",
+    "verification_date": "2024-04-24",
+    "sources": [
+      "Public Law 118-50 (Div. H) — Protecting Americans from Foreign Adversary Controlled Applications Act",
+      "White House Signing Statement (April 24, 2024)",
+      "Congressional Record H2502-H2514"
+    ],
+    "detailed_analysis": "The statute establishes a mandatory 270-day divestiture timeline for ByteDance with potential 90-day extension, or TikTok will face a ban on American app stores and hosting services.",
+    "tags": [
+      "tiktok",
+      "bytedance",
+      "national-security",
+      "social-media",
+      "congress"
+    ]
+  },
+  {
+    "id": "NEWS-039",
+    "category": "Science & Health",
+    "headline": "India's Chandrayaan-3 rover confirms presence of sulfur and oxygen at lunar south pole",
+    "claim": "The Pragyan lunar rover's laser-induced breakdown spectroscope unequivocally detected sulfur in moon regolith.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 97,
+    "bias_rating": "Neutral",
+    "fact_checker": "Nature News",
+    "verification_date": "2023-08-31",
+    "sources": [
+      "Indian Space Research Organisation (ISRO) Chandrayaan-3 Mission Update",
+      "Science Magazine Space Research News",
+      "Nature Geoscience Lunar Surface Analysis"
+    ],
+    "detailed_analysis": "ISRO confirmed that the LIBS instrument aboard Pragyan carried out the first in-situ elemental measurements near the south pole, registering unambiguous spectral signatures of sulfur, iron, aluminum, calcium, and oxygen.",
+    "tags": [
+      "chandrayaan3",
+      "isro",
+      "moon",
+      "space",
+      "pragyan"
+    ]
+  },
+  {
+    "id": "NEWS-040",
+    "category": "Viral Hoaxes & Media",
+    "headline": "Secret Antarctic pyramid discovered under melting snow proves ancient civilization lived at South Pole",
+    "claim": "Satellite images revealed a man-made four-sided limestone pyramid standing over 1,200 meters tall in Antarctica.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 6,
+    "bias_rating": "Pseudoscientific Sensationalism",
+    "fact_checker": "Live Science",
+    "verification_date": "2023-10-05",
+    "sources": [
+      "British Antarctic Survey (BAS) Geomorphology Data",
+      "USGS Polar Glacier Topographic Mapping",
+      "Snopes Myth Debunking"
+    ],
+    "detailed_analysis": "Geologists from the British Antarctic Survey confirmed the feature is a 'nunatak'—a natural pyramid-shaped mountain peak formed through standard freeze-thaw erosion in the Ellsworth Mountains.",
+    "tags": [
+      "antarctica",
+      "pyramid",
+      "geology",
+      "nunatak",
+      "archaeology-hoax"
+    ]
+  },
+  {
+    "id": "NEWS-041",
+    "category": "Climate & Environment",
+    "headline": "Plastic-eating bacteria engineered in laboratory can clean up entire Pacific garbage patch within six months",
+    "claim": "A newly synthesized super-bacterium will dissolve all ocean plastic debris by the end of this year.",
+    "verdict": "Likely Misleading",
+    "verdict_class": "badge-fake",
+    "credibility_score": 26,
+    "bias_rating": "Sensationalist Tech Solutionism",
+    "fact_checker": "Science Feedback",
+    "verification_date": "2024-05-14",
+    "sources": [
+      "Nature Catalysis — Enzymatic plastic degradation studies",
+      "The Ocean Cleanup Project Feasibility Reports",
+      "UN Environment Programme (UNEP) Plastic Pollution Assessments"
+    ],
+    "detailed_analysis": "While bacterial enzymes such as PETase show promise in controlled high-temperature bioreactors, deploying living genetically modified bacteria into open marine ecosystems faces enormous biohazard hurdles and sluggish enzymatic kinetics in cold seawater.",
+    "tags": [
+      "plastic-eating-bacteria",
+      "petase",
+      "ocean-cleanup",
+      "biotech"
+    ]
+  },
+  {
+    "id": "NEWS-042",
+    "category": "Economy & Finance",
+    "headline": "Sam Bankman-Fried sentenced to 25 years in federal prison for FTX cryptocurrency collapse",
+    "claim": "FTX founder Sam Bankman-Fried received a 25-year prison term for orchestrating a multi-billion dollar fraud.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 99,
+    "bias_rating": "Neutral",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-03-28",
+    "sources": [
+      "U.S. District Court for the Southern District of New York (SDNY) Sentencing Record",
+      "Department of Justice U.S. Attorney's Office SDNY Press Release",
+      "Wall Street Journal Legal Coverage"
+    ],
+    "detailed_analysis": "US District Judge Lewis Kaplan handed down the 25-year sentence and ordered an $11 billion forfeiture after a jury convicted Bankman-Fried on seven counts of wire fraud, securities fraud, and money laundering conspiracy.",
+    "tags": [
+      "ftx",
+      "sam-bankman-fried",
+      "crypto-fraud",
+      "sdny",
+      "doj"
+    ]
+  },
+  {
+    "id": "NEWS-043",
+    "category": "Global Affairs",
+    "headline": "NASA and DARPA select Lockheed Martin to build nuclear-powered thermal rocket for Mars exploration",
+    "claim": "The DRACO project officially contracted defense aerospace contractors to design a fission-powered spacecraft engine for deep space voyages.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 96,
+    "bias_rating": "Neutral",
+    "fact_checker": "Aviation Week",
+    "verification_date": "2023-07-26",
+    "sources": [
+      "DARPA News — Demonstration Rocket for Agile Cislunar Operations (DRACO) Contract Award",
+      "NASA Space Technology Mission Directorate Project Update",
+      "Lockheed Martin Space Systems Press Release"
+    ],
+    "detailed_analysis": "NASA and DARPA partnered on the DRACO initiative, awarding Lockheed Martin the prime role to develop an in-space nuclear thermal propulsion (NTP) flight demonstration planned for 2027.",
+    "tags": [
+      "nasa",
+      "darpa",
+      "nuclear-rocket",
+      "mars",
+      "lockheed-martin"
+    ]
+  },
+  {
+    "id": "NEWS-044",
+    "category": "Science & Health",
+    "headline": "Artificial sweeteners like aspartame definitively cause leukemia and brain cancer in normal amounts",
+    "claim": "Consuming diet soda with aspartame directly triggers deadly cancerous tumors in human consumers.",
+    "verdict": "Likely Misleading",
+    "verdict_class": "badge-fake",
+    "credibility_score": 34,
+    "bias_rating": "Fearmongering Nutritional Health",
+    "fact_checker": "Healthline Fact Check",
+    "verification_date": "2023-07-14",
+    "sources": [
+      "IARC Monographs Volume 134 — Aspartame classification (Group 2B)",
+      "Joint FAO/WHO Expert Committee on Food Additives (JECFA) Risk Assessment",
+      "U.S. FDA Response on Sweetener Safety"
+    ],
+    "detailed_analysis": "While WHO's IARC classified aspartame as 'possibly carcinogenic to humans' (Group 2B based on limited evidence), the joint FAO/WHO committee (JECFA) reaffirmed that the acceptable daily intake of 40 mg/kg body weight is safe. A person would need to drink 9 to 14 cans of diet soda daily to exceed safety thresholds.",
+    "tags": [
+      "aspartame",
+      "sweeteners",
+      "who",
+      "diet-soda",
+      "cancer-risk"
+    ]
+  },
+  {
+    "id": "NEWS-045",
+    "category": "Viral Hoaxes & Media",
+    "headline": "NASA confirmed the sun will shut down for three days of absolute planetary darkness next December",
+    "claim": "An official NASA bulletin warned that an unprecedented solar storm will block out the sun globally for 72 hours.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 2,
+    "bias_rating": "Doomsday Clickbait",
+    "fact_checker": "Snopes",
+    "verification_date": "2024-09-01",
+    "sources": [
+      "NASA Space Weather Operations & Living With a Star Documentation",
+      "NOAA Space Weather Prediction Center (SWPC)",
+      "PolitiFact Apocalypse Hoaxes Archive"
+    ],
+    "detailed_analysis": "This recurrent viral internet hoax has circulated periodically since at least 2012. Solar physics dictates that stars cannot 'turn off' for three days, and NASA has never published any such warning.",
+    "tags": [
+      "nasa",
+      "solar-storm",
+      "three-days-darkness",
+      "doomsday-hoax"
+    ]
+  },
+  {
+    "id": "NEWS-046",
+    "category": "Technology & AI",
+    "headline": "Neuralink successfully implants brain-computer interface into second human patient",
+    "claim": "Elon Musk's neurotechnology startup Neuralink completed a second clinical trial implantation allowing a paralyzed participant to play video games using thought.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 95,
+    "bias_rating": "Neutral",
+    "fact_checker": "Reuters",
+    "verification_date": "2024-08-04",
+    "sources": [
+      "Neuralink Prime Study Progress Update Blog",
+      "U.S. FDA Investigational Device Exemption (IDE) Registry",
+      "Wired Science & Neuroengineering Reporting"
+    ],
+    "detailed_analysis": "The second patient, named Alex, demonstrated cursor control and 3D CAD software navigation without electrode thread retraction issues that affected the initial trial participant.",
+    "tags": [
+      "neuralink",
+      "bci",
+      "neurotechnology",
+      "elon-musk",
+      "medical-devices"
+    ]
+  },
+  {
+    "id": "NEWS-047",
+    "category": "Politics & Elections",
+    "headline": "United Kingdom elects Labour Party with historic parliamentary landslide, ending 14 years of Conservative rule",
+    "claim": "Keir Starmer became Prime Minister after Labour won 411 seats in the UK General Election.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 99,
+    "bias_rating": "Neutral",
+    "fact_checker": "BBC News",
+    "verification_date": "2024-07-05",
+    "sources": [
+      "UK Electoral Commission Official Results — 2024 General Election",
+      "House of Commons Library Research Briefings",
+      "Reuters UK Politics Coverage"
+    ],
+    "detailed_analysis": "The Labour Party won a decisive 174-seat majority in the House of Commons, leading Rishi Sunak to resign and King Charles III to invite Sir Keir Starmer to form a new government.",
+    "tags": [
+      "uk-election",
+      "keir-starmer",
+      "labour",
+      "politics",
+      "westminster"
+    ]
+  },
+  {
+    "id": "NEWS-048",
+    "category": "Science & Health",
+    "headline": "Surgeons successfully perform first pig kidney transplant into living human recipient",
+    "claim": "Massachusetts General Hospital doctors transplanted a genetically edited porcine kidney into a 62-year-old patient with end-stage renal disease.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 97,
+    "bias_rating": "Neutral",
+    "fact_checker": "Associated Press",
+    "verification_date": "2024-03-21",
+    "sources": [
+      "Massachusetts General Hospital (MGH) Medical News",
+      "eGenesis Genomic Editing Disclosures",
+      "New England Journal of Medicine Xenotransplantation Special Report"
+    ],
+    "detailed_analysis": "The surgical team at MGH completed the historic 4-hour operation on Richard Slayman using a donor organ with 69 genomic edits to inactivate retroviruses and humanize cell antigens.",
+    "tags": [
+      "xenotransplantation",
+      "organ-transplant",
+      "mgh",
+      "medicine",
+      "genetics"
+    ]
+  },
+  {
+    "id": "NEWS-049",
+    "category": "Economy & Finance",
+    "headline": "European Central Bank cuts key deposit rate by 25 basis points, outpacing the US Federal Reserve",
+    "claim": "The ECB reduced its deposit facility rate from record 4.00% to 3.75% in its first cut since 2019.",
+    "verdict": "Verified & Accurate",
+    "verdict_class": "badge-credible",
+    "credibility_score": 98,
+    "bias_rating": "Neutral",
+    "fact_checker": "Financial Times",
+    "verification_date": "2024-06-06",
+    "sources": [
+      "European Central Bank Monetary Policy Decisions Bulletin",
+      "ECB President Christine Lagarde Press Conference Transcript",
+      "Eurostat Harmonised Index of Consumer Prices"
+    ],
+    "detailed_analysis": "The ECB Governing Council approved the benchmark rate cut following nine consecutive months of declining Eurozone inflation towards the 2% target.",
+    "tags": [
+      "ecb",
+      "interest-rates",
+      "eurozone",
+      "christine-lagarde",
+      "monetary-policy"
+    ]
+  },
+  {
+    "id": "NEWS-050",
+    "category": "Viral Hoaxes & Media",
+    "headline": "Secret audio proves astronauts were attacked by hostile crystalline beings on dark side of the moon",
+    "claim": "Apollo 11 classified audio recordings contain radio transmissions of astronauts screaming during an extraterrestrial confrontation.",
+    "verdict": "False & Fabricated",
+    "verdict_class": "badge-fake",
+    "credibility_score": 2,
+    "bias_rating": "Sensationalist Sci-Fi Hoax",
+    "fact_checker": "Snopes",
+    "verification_date": "2024-01-15",
+    "sources": [
+      "NASA Apollo 11 Flight Journal & Complete Transcript Logs",
+      "Lunar and Planetary Institute Audio Archives",
+      "Smithsonian National Air and Space Museum Records"
+    ],
+    "detailed_analysis": "The entire Apollo 11 audio and transcript record has been public for decades. The viral audio clip is a digital voice synth mashup accompanied by fictional audio tracks from sci-fi film soundboards.",
+    "tags": [
+      "apollo11",
+      "moon-hoax",
+      "aliens",
+      "nasa",
+      "conspiracy"
+    ]
+  }
+]

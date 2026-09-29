@@ -3,19 +3,30 @@ NewsScope AI — Backend API Server
 FastAPI application powering news validity verification with Google Gemini 3.6 Flash.
 """
 
+import asyncio
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.config import MODEL_NAME, DEBUG
+from backend.config import MODEL_NAME, DEBUG, KAGGLE_AUTO_SYNC
 from backend.routes.health import router as health_router
 from backend.routes.dataset import router as dataset_router
 from backend.routes.verify import router as verify_router
 from backend.routes.chat import router as chat_router
+from backend.services.kaggle_service import kaggle_sync_service
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Trigger background dataset sync on server start if enabled
+    if KAGGLE_AUTO_SYNC:
+        asyncio.create_task(asyncio.to_thread(kaggle_sync_service.sync))
+    yield
 
 app = FastAPI(
     title="NewsScope AI API",
     description="Backend service for news verification, bias detection, and fact-checking with Gemini 3.6 Flash.",
     version="2.0.0",
-    debug=DEBUG
+    debug=DEBUG,
+    lifespan=lifespan
 )
 
 # Enable CORS for frontend dev server
@@ -45,6 +56,9 @@ def root():
             "verify": "POST /api/verify",
             "dataset": "GET /api/dataset",
             "dataset_stats": "GET /api/dataset/stats",
-            "dataset_random": "GET /api/dataset/random"
+            "dataset_random": "GET /api/dataset/random",
+            "dataset_sync": "POST /api/dataset/sync",
+            "dataset_sync_status": "GET /api/dataset/sync/status"
         }
     }
+

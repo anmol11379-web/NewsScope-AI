@@ -8,6 +8,7 @@ import { initAuth } from './auth.js';
 import { initVoice } from './voice.js';
 import { initSidebar, updateUserInfo, refreshSidebar } from './sidebar.js';
 import { initChat, loadChat, setVoiceTranscript, handleSend } from './chat.js';
+import { initDatasetModal } from './dataset-modal.js';
 
 // ══════════════════════════════════════════════════════
 // BOOT
@@ -54,6 +55,7 @@ function showChatView(user) {
   });
 
   initChat();
+  initDatasetModal();
 
   initVoice((transcript, isFinal) => {
     setVoiceTranscript(transcript);

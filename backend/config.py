@@ -27,3 +27,10 @@ DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 # Dataset Configuration
 DATASET_PATH_JSON = BACKEND_DIR / "data" / "news_dataset.json"
 DATASET_PATH_CSV = BACKEND_DIR / "data" / "news_dataset.csv"
+BENCHMARK_SEED_PATH = BACKEND_DIR / "data" / "benchmark_seed.json"
+
+# Kaggle Dataset Configuration
+KAGGLE_DATASET_SLUG = os.getenv("KAGGLE_DATASET_SLUG", "gpreda/bbc-news").strip()
+KAGGLE_MAX_ITEMS = int(os.getenv("KAGGLE_MAX_ITEMS", "1000"))
+KAGGLE_AUTO_SYNC = os.getenv("KAGGLE_AUTO_SYNC", "true").lower() == "true"
+
