@@ -8,3 +8,5 @@ __pycache__/
 .venv/
 venv/
 backend/data/kaggle_cache/
+*.db
+backend/data/users.db

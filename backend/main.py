@@ -12,6 +12,7 @@ from backend.routes.health import router as health_router
 from backend.routes.dataset import router as dataset_router
 from backend.routes.verify import router as verify_router
 from backend.routes.chat import router as chat_router
+from backend.routes.auth import router as auth_router
 from backend.services.kaggle_service import kaggle_sync_service
 
 @asynccontextmanager
@@ -40,6 +41,7 @@ app.add_middleware(
 
 # Register routers
 app.include_router(health_router)
+app.include_router(auth_router)
 app.include_router(dataset_router)
 app.include_router(verify_router)
 app.include_router(chat_router)

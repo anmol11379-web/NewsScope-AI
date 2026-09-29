@@ -4,6 +4,7 @@
    ═══════════════════════════════════════════════════════ */
 
 import { saveUser, findUser, registerUser } from './storage.js';
+import { API_BASE_URL } from './config.js';
 
 let onAuthSuccess = null;
 
@@ -56,12 +57,13 @@ function switchTab(target) {
   document.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
 }
 
-function handleLogin(e) {
+async function handleLogin(e) {
   e.preventDefault();
   clearErrors();
 
   const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
+  const submitBtn = document.getElementById('login-submit-btn');
 
   // Validate
   let valid = true;
@@ -79,21 +81,50 @@ function handleLogin(e) {
     return;
   }
 
-  // Check credentials
-  const user = findUser(email);
-  if (!user || user.password !== password) {
-    showError('login-email', 'Invalid email or password');
-    shakeCard();
-    return;
+  const origBtnContent = submitBtn ? submitBtn.innerHTML : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Verifying credentials...</span>';
   }
 
-  // Success
-  const sessionUser = { name: user.name, email: user.email, initials: getInitials(user.name) };
-  saveUser(sessionUser);
-  if (onAuthSuccess) onAuthSuccess(sessionUser);
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok && data.success && data.user) {
+      saveUser(data.user);
+      if (onAuthSuccess) onAuthSuccess(data.user);
+      return;
+    } else {
+      showError('login-email', data.detail || data.message || 'Invalid email or password');
+      shakeCard();
+      return;
+    }
+  } catch (err) {
+    console.warn('Backend auth unreachable, falling back to local verification:', err);
+    const localUser = findUser(email);
+    if (localUser && localUser.password === password) {
+      const sessionUser = { name: localUser.name, email: localUser.email, initials: getInitials(localUser.name) };
+      saveUser(sessionUser);
+      if (onAuthSuccess) onAuthSuccess(sessionUser);
+      return;
+    }
+    showError('login-email', 'Unable to reach authentication server. Please try again.');
+    shakeCard();
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = origBtnContent;
+    }
+  }
 }
 
-function handleSignup(e) {
+async function handleSignup(e) {
   e.preventDefault();
   clearErrors();
 
@@ -101,6 +132,7 @@ function handleSignup(e) {
   const email = document.getElementById('signup-email').value.trim();
   const password = document.getElementById('signup-password').value;
   const confirm = document.getElementById('signup-confirm').value;
+  const submitBtn = document.getElementById('signup-submit-btn');
 
   // Validate
   let valid = true;
@@ -126,18 +158,49 @@ function handleSignup(e) {
     return;
   }
 
-  // Check if user exists
-  if (findUser(email)) {
-    showError('signup-email', 'An account with this email already exists');
-    shakeCard();
-    return;
+  const origBtnContent = submitBtn ? submitBtn.innerHTML : '';
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Creating account...</span>';
   }
 
-  // Register
-  registerUser({ name, email, password });
-  const sessionUser = { name, email, initials: getInitials(name) };
-  saveUser(sessionUser);
-  if (onAuthSuccess) onAuthSuccess(sessionUser);
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, password })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if (res.ok && data.success && data.user) {
+      registerUser({ name, email, password });
+      saveUser(data.user);
+      if (onAuthSuccess) onAuthSuccess(data.user);
+      return;
+    } else {
+      showError('signup-email', data.detail || data.message || 'Registration failed');
+      shakeCard();
+      return;
+    }
+  } catch (err) {
+    console.warn('Backend auth unreachable, registering in local storage:', err);
+    if (findUser(email)) {
+      showError('signup-email', 'An account with this email already exists');
+      shakeCard();
+      return;
+    }
+
+    registerUser({ name, email, password });
+    const sessionUser = { name, email, initials: getInitials(name) };
+    saveUser(sessionUser);
+    if (onAuthSuccess) onAuthSuccess(sessionUser);
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = origBtnContent;
+    }
+  }
 }
 
 function handleGoogleAuth() {

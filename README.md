@@ -154,6 +154,8 @@ Open `http://localhost:3000` in your browser!
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `GET` | `/api/health` | Check if backend and Gemini model are ready |
+| `POST` | `/api/auth/register` | Register new user account with secure PBKDF2 hashing |
+| `POST` | `/api/auth/login` | Authenticate user credentials and return user profile |
 | `POST` | `/api/chat` | Main endpoint for news queries & chat |
 | `POST` | `/api/verify` | Standalone verification endpoint for raw claims |
 | `GET` | `/api/dataset` | Retrieve curated benchmark claims with search/filter |
