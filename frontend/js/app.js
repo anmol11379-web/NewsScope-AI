@@ -4,12 +4,14 @@
 
 import { getUser, removeUser } from './storage.js';
 import { initTheme, toggleTheme } from './theme.js';
-import { initAuth } from './auth.js';
+import { initAuth, resetAuthForms } from './auth.js';
 import { initVoice } from './voice.js';
 import { initSidebar, updateUserInfo, refreshSidebar } from './sidebar.js';
 import { initChat, loadChat, setVoiceTranscript, handleSend } from './chat.js';
 import { initDatasetModal } from './dataset-modal.js';
 import { API_BASE_URL } from './config.js';
+
+let chatModulesInitialized = false;
 
 // ══════════════════════════════════════════════════════
 // BACKEND WARMUP (Wakes up Render container immediately on page open)
@@ -65,9 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Init theme first (no flash of wrong theme)
   initTheme();
 
-  // 3. Check auth state
+  // 3. Register auth handlers (only triggered when user logs in / registers)
+  initAuth((user) => {
+    showChatView(user);
+  });
+
+  // 4. Strict check for new vs returning users:
+  // If no user session is found in localStorage -> new visitor, strictly show login page first
+  // If user session is found -> existing user, show AI chat view
   const user = getUser();
-  if (user) {
+  if (user && user.email) {
     showChatView(user);
   } else {
     showAuthView();
@@ -78,61 +87,85 @@ document.addEventListener('DOMContentLoaded', () => {
 // VIEW SWITCHING
 // ══════════════════════════════════════════════════════
 function showAuthView() {
-  document.getElementById('auth-view').classList.add('active');
-  document.getElementById('chat-view').classList.remove('active');
+  const authView = document.getElementById('auth-view');
+  const chatView = document.getElementById('chat-view');
 
-  initAuth((user) => {
-    // Auth success callback
-    document.getElementById('auth-view').classList.remove('active');
-    showChatView(user);
-  });
+  if (chatView) chatView.classList.remove('active');
+  if (authView) authView.classList.add('active');
+
+  resetAuthForms();
 }
 
 function showChatView(user) {
-  document.getElementById('auth-view')?.classList.remove('active');
-  document.getElementById('chat-view').classList.add('active');
+  const authView = document.getElementById('auth-view');
+  const chatView = document.getElementById('chat-view');
 
-  // Init modules
-  initSidebar({
-    onChatSelect: (chatId) => {
-      loadChat(chatId);
-    },
-    onNewChat: (chat) => {
-      loadChat(chat.id);
-    },
-  });
+  if (authView) authView.classList.remove('active');
+  if (chatView) chatView.classList.add('active');
 
-  initChat();
-  initDatasetModal();
+  // Initialize interactive chat engine & modules only once to prevent duplicate listeners
+  if (!chatModulesInitialized) {
+    chatModulesInitialized = true;
 
-  initVoice((transcript, isFinal) => {
-    setVoiceTranscript(transcript);
-    if (isFinal) {
-      // Auto-send after final transcript
-      setTimeout(() => handleSend(), 300);
-    }
-  });
+    initSidebar({
+      onChatSelect: (chatId) => {
+        loadChat(chatId);
+      },
+      onNewChat: (chat) => {
+        loadChat(chat.id);
+      },
+    });
 
-  // Update user info in sidebar
-  updateUserInfo(user);
+    initChat();
+    initDatasetModal();
 
-  // Theme toggle button
-  const themeBtn = document.getElementById('theme-toggle');
-  if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+    initVoice((transcript, isFinal) => {
+      setVoiceTranscript(transcript);
+      if (isFinal) {
+        setTimeout(() => handleSend(), 300);
+      }
+    });
 
-  // User dropdown
-  setupUserDropdown(user);
+    // Theme toggle button
+    const themeBtn = document.getElementById('theme-toggle');
+    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+
+    // Setup user dropdown and logout triggers
+    setupUserControls();
+  }
+
+  // Update user profile info across sidebar and topbar
+  if (user) {
+    updateUserInfo(user);
+    updateDropdownUser(user);
+  }
 }
 
 // ══════════════════════════════════════════════════════
-// USER DROPDOWN
+// USER DROPDOWN & LOGOUT CONTROLS
 // ══════════════════════════════════════════════════════
-function setupUserDropdown(user) {
+function updateDropdownUser(user) {
+  const topbarAvatar = document.querySelector('.topbar .avatar');
+  if (topbarAvatar && user) {
+    topbarAvatar.textContent = user.initials || (user.name ? user.name.slice(0, 2).toUpperCase() : 'DU');
+  }
+}
+
+function handleLogout() {
+  // Clear stored auth session
+  removeUser();
+
+  // Close dropdown if open
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.remove('active');
+
+  // Transition back to the login view
+  showAuthView();
+}
+
+function setupUserControls() {
   const avatarBtn = document.getElementById('user-avatar-btn');
   const dropdown = document.getElementById('user-dropdown');
-  const topbarAvatar = document.querySelector('.topbar .avatar');
-
-  if (topbarAvatar) topbarAvatar.textContent = user.initials || user.name.slice(0, 2).toUpperCase();
 
   if (avatarBtn && dropdown) {
     avatarBtn.addEventListener('click', (e) => {
@@ -149,13 +182,21 @@ function setupUserDropdown(user) {
     });
   }
 
-  // Logout button
+  // Topbar dropdown Logout button
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      removeUser();
-      document.getElementById('chat-view').classList.remove('active');
-      showAuthView();
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleLogout();
+    });
+  }
+
+  // Sidebar footer quick Logout button
+  const sidebarLogoutBtn = document.getElementById('sidebar-logout-btn');
+  if (sidebarLogoutBtn) {
+    sidebarLogoutBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      handleLogout();
     });
   }
 }

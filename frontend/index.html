@@ -29,9 +29,9 @@
   <div class="app">
 
     <!-- ════════════════════════════════════════════════════
-         AUTH VIEW
+         AUTH VIEW (Visible by default for new visitors)
          ════════════════════════════════════════════════════ -->
-    <div id="auth-view" class="view">
+    <div id="auth-view" class="view active">
       <!-- Animated Background -->
       <div class="auth-background">
         <div class="auth-grid"></div>
@@ -224,23 +224,19 @@
 
         <!-- Footer / User -->
         <div class="sidebar-footer">
-          <div style="padding: 4px 6px 8px 6px;">
-            <button id="sidebar-dataset-btn" class="btn-ghost" style="width: 100%; display: flex; align-items: center; gap: 8px; justify-content: flex-start; padding: 7px 10px; font-size: var(--font-xs); color: var(--text-secondary); border-radius: var(--radius-md); cursor: pointer; border: 1px solid var(--border-subtle); background: var(--glass-bg);">
-              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-              </svg>
-              <span>News Dataset & Kaggle</span>
-            </button>
-          </div>
-          <div class="sidebar-user">
-
+          <div class="sidebar-user" id="sidebar-user-row">
             <div class="avatar">DU</div>
             <div class="sidebar-user-info">
               <div class="sidebar-user-name">Demo User</div>
               <div class="sidebar-user-email">demo@newsscope.ai</div>
             </div>
+            <button class="btn-icon tooltip" id="sidebar-logout-btn" data-tooltip="Log Out" aria-label="Log Out" title="Log Out" style="margin-left: auto; width: 28px; height: 28px; color: var(--text-tertiary); display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); border: none; background: transparent; cursor: pointer;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+              </svg>
+            </button>
           </div>
         </div>
       </aside>

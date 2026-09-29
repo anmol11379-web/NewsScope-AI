@@ -7,9 +7,12 @@ import { saveUser, findUser, registerUser } from './storage.js';
 import { API_BASE_URL } from './config.js';
 
 let onAuthSuccess = null;
+let authInitialized = false;
 
 export function initAuth(callback) {
-  onAuthSuccess = callback;
+  if (callback) onAuthSuccess = callback;
+  if (authInitialized) return;
+  authInitialized = true;
 
   // Tab switching
   const tabs = document.querySelectorAll('.auth-tab');
@@ -22,11 +25,11 @@ export function initAuth(callback) {
 
   // Login form
   const loginForm = document.getElementById('login-form');
-  loginForm.addEventListener('submit', handleLogin);
+  if (loginForm) loginForm.addEventListener('submit', handleLogin);
 
   // Signup form
   const signupForm = document.getElementById('signup-form');
-  signupForm.addEventListener('submit', handleSignup);
+  if (signupForm) signupForm.addEventListener('submit', handleSignup);
 
   // Google button (demo)
   document.querySelectorAll('.btn-google').forEach(btn => {
@@ -46,12 +49,21 @@ export function initAuth(callback) {
   });
 }
 
-function switchTab(target) {
+export function resetAuthForms() {
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+  if (loginForm) loginForm.reset();
+  if (signupForm) signupForm.reset();
+  clearErrors();
+  switchTab('login');
+}
+
+export function switchTab(target) {
   document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector(`.auth-tab[data-tab="${target}"]`).classList.add('active');
+  document.querySelector(`.auth-tab[data-tab="${target}"]`)?.classList.add('active');
 
   document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-  document.getElementById(`${target}-form`).classList.add('active');
+  document.getElementById(`${target}-form`)?.classList.add('active');
 
   // Clear errors
   document.querySelectorAll('.form-group').forEach(g => g.classList.remove('has-error'));
