@@ -167,6 +167,49 @@ function handleLogout() {
   showAuthView();
 }
 
+function openProfileModal() {
+  const user = getUser() || {};
+  const modalBackdrop = document.getElementById('profile-modal-backdrop');
+  if (!modalBackdrop) return;
+
+  const avatarEl = document.getElementById('profile-modal-avatar');
+  const nameEl = document.getElementById('profile-modal-name');
+  const emailEl = document.getElementById('profile-modal-email');
+  const phoneEl = document.getElementById('profile-modal-phone');
+
+  // 1. Profile Icon (Image if Google/uploaded, else gradient with initials)
+  if (avatarEl) {
+    if (user.picture) {
+      avatarEl.innerHTML = `<img src="${user.picture}" alt="${user.name || 'User'}" />`;
+    } else {
+      avatarEl.textContent = user.initials || (user.name ? user.name.slice(0, 2).toUpperCase() : 'NS');
+    }
+  }
+
+  // 2. Name
+  if (nameEl) {
+    nameEl.textContent = user.name || 'Not provided';
+  }
+
+  // 3. Email
+  if (emailEl) {
+    emailEl.textContent = user.email || 'Not provided';
+  }
+
+  // 4. Phone Number as empty
+  if (phoneEl) {
+    phoneEl.textContent = 'Empty';
+    phoneEl.className = 'profile-info-val empty';
+  }
+
+  modalBackdrop.classList.add('active');
+}
+
+function closeProfileModal() {
+  const modalBackdrop = document.getElementById('profile-modal-backdrop');
+  if (modalBackdrop) modalBackdrop.classList.remove('active');
+}
+
 function setupUserControls() {
   const avatarBtn = document.getElementById('user-avatar-btn');
   const dropdown = document.getElementById('user-dropdown');
@@ -185,6 +228,51 @@ function setupUserControls() {
       e.stopPropagation();
     });
   }
+
+  // Topbar dropdown Profile button
+  const profileBtn = document.getElementById('profile-btn');
+  if (profileBtn) {
+    profileBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (dropdown) dropdown.classList.remove('active');
+      openProfileModal();
+    });
+  }
+
+  // Sidebar user row opens profile modal
+  const sidebarUserRow = document.getElementById('sidebar-user-row');
+  if (sidebarUserRow) {
+    sidebarUserRow.addEventListener('click', (e) => {
+      // Don't open profile if they clicked the quick logout button inside the row
+      if (e.target.closest('#sidebar-logout-btn')) return;
+      openProfileModal();
+    });
+  }
+
+  // Profile modal close buttons
+  const modalCloseBtn = document.getElementById('profile-modal-close');
+  if (modalCloseBtn) {
+    modalCloseBtn.addEventListener('click', closeProfileModal);
+  }
+
+  const modalFooterCloseBtn = document.getElementById('profile-modal-close-btn');
+  if (modalFooterCloseBtn) {
+    modalFooterCloseBtn.addEventListener('click', closeProfileModal);
+  }
+
+  // Backdrop click to close profile modal
+  const profileBackdrop = document.getElementById('profile-modal-backdrop');
+  if (profileBackdrop) {
+    profileBackdrop.addEventListener('click', (e) => {
+      if (e.target === profileBackdrop) closeProfileModal();
+    });
+  }
+
+  // Escape key closes modal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeProfileModal();
+  });
 
   // Topbar dropdown Logout button
   const logoutBtn = document.getElementById('logout-btn');
