@@ -178,12 +178,19 @@ export function refreshSidebar() {
 }
 
 export function updateUserInfo(user) {
+  if (!user) return;
   const nameEl = document.querySelector('.sidebar-user-name');
   const emailEl = document.querySelector('.sidebar-user-email');
   const avatarEl = document.querySelector('.sidebar-footer .avatar');
-  if (nameEl) nameEl.textContent = user.name;
-  if (emailEl) emailEl.textContent = user.email;
-  if (avatarEl) avatarEl.textContent = user.initials || user.name.slice(0, 2).toUpperCase();
+  if (nameEl) nameEl.textContent = user.name || 'User';
+  if (emailEl) emailEl.textContent = user.email || '';
+  if (avatarEl) {
+    if (user.picture) {
+      avatarEl.innerHTML = `<img src="${user.picture}" alt="${user.name || 'User'}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />`;
+    } else {
+      avatarEl.textContent = user.initials || (user.name ? user.name.slice(0, 2).toUpperCase() : 'US');
+    }
+  }
 }
 
 // ── Helpers ──

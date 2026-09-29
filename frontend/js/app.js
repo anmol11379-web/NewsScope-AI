@@ -147,7 +147,11 @@ function showChatView(user) {
 function updateDropdownUser(user) {
   const topbarAvatar = document.querySelector('.topbar .avatar');
   if (topbarAvatar && user) {
-    topbarAvatar.textContent = user.initials || (user.name ? user.name.slice(0, 2).toUpperCase() : 'DU');
+    if (user.picture) {
+      topbarAvatar.innerHTML = `<img src="${user.picture}" alt="${user.name || 'User'}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;" />`;
+    } else {
+      topbarAvatar.textContent = user.initials || (user.name ? user.name.slice(0, 2).toUpperCase() : 'DU');
+    }
   }
 }
 
