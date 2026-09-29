@@ -34,3 +34,9 @@ KAGGLE_DATASET_SLUG = os.getenv("KAGGLE_DATASET_SLUG", "gpreda/bbc-news").strip(
 KAGGLE_MAX_ITEMS = int(os.getenv("KAGGLE_MAX_ITEMS", "1000"))
 KAGGLE_AUTO_SYNC = os.getenv("KAGGLE_AUTO_SYNC", "true").lower() == "true"
 
+# SMS Gateway Configuration (for sending real SMS to user's mobile)
+FAST2SMS_API_KEY = os.getenv("FAST2SMS_API_KEY", "").strip()
+TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "").strip()
+TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "").strip()
+TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER", "").strip()
+

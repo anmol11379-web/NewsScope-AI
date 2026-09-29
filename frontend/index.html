@@ -550,63 +550,6 @@
               </span>
               <span class="profile-info-val" id="profile-modal-email">—</span>
             </div>
-
-            <!-- Phone Number -->
-            <div class="profile-info-row">
-              <span class="profile-info-label">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-                Phone Number
-              </span>
-              <div class="profile-phone-row" id="profile-phone-display-wrap">
-                <span class="profile-info-val empty" id="profile-modal-phone">Empty</span>
-                <span id="profile-phone-verified-badge" class="phone-verified-badge" style="display: none;">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  Verified
-                </span>
-                <button type="button" class="profile-pencil-btn" id="profile-pencil-btn" title="Add / Edit phone number" aria-label="Edit phone number">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                  </svg>
-                </button>
-              </div>
-
-              <!-- Step 1: Phone Input Form -->
-              <div class="profile-phone-edit-wrap" id="profile-phone-edit-wrap" style="display: none;">
-                <input type="tel" id="profile-phone-input" class="input-field" placeholder="Enter mobile number (e.g. 9812753654)" maxlength="16" style="padding: 7px 11px; font-size: 13px;" />
-                <div class="profile-phone-error" id="profile-phone-error" style="display: none; color: #ef4444; font-size: 11px; margin-top: 4px;"></div>
-                <div style="display: flex; gap: 6px; margin-top: 6px;">
-                  <button type="button" class="btn-primary" id="profile-phone-save-btn" style="padding: 5px 16px; font-size: 12px; border-radius: 4px; cursor: pointer;">Save</button>
-                  <button type="button" class="btn-ghost" id="profile-phone-cancel-btn" style="padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer;">Cancel</button>
-                </div>
-              </div>
-
-              <!-- Step 2: OTP Verification Form -->
-              <div class="profile-otp-wrap" id="profile-otp-wrap" style="display: none;">
-                <div class="otp-notice" id="profile-otp-notice">
-                  <div class="otp-banner">
-                    <span class="otp-banner-icon">📩</span>
-                    <span class="otp-banner-text" id="profile-otp-banner-text">OTP sent to <strong>phone</strong></span>
-                  </div>
-                  <div class="otp-hint-badge" id="profile-otp-hint">Code: <strong id="profile-otp-demo-code">4829</strong></div>
-                </div>
-                <div style="margin-top: 8px;">
-                  <input type="text" id="profile-otp-input" class="input-field otp-input" placeholder="Enter 4-digit OTP" maxlength="6" style="padding: 7px 12px; font-size: 14px; letter-spacing: 4px; font-weight: 600; text-align: center;" />
-                  <div class="profile-otp-error" id="profile-otp-error" style="display: none; color: #ef4444; font-size: 11px; margin-top: 4px; text-align: center;"></div>
-                </div>
-                <div style="display: flex; gap: 8px; margin-top: 10px; justify-content: space-between; align-items: center;">
-                  <div style="display: flex; gap: 6px;">
-                    <button type="button" class="btn-primary" id="profile-otp-verify-btn" style="padding: 5px 16px; font-size: 12px; border-radius: 4px; cursor: pointer;">Verify & Save</button>
-                    <button type="button" class="btn-ghost" id="profile-otp-cancel-btn" style="padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer;">Change Number</button>
-                  </div>
-                  <button type="button" class="btn-ghost" id="profile-otp-resend-btn" style="padding: 4px 8px; font-size: 11px; color: var(--accent); cursor: pointer; text-decoration: underline;">Resend</button>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
 
