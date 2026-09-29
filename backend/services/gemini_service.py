@@ -119,8 +119,8 @@ Analyze the following user query or claim for validity, factual accuracy, and bi
 Output ONLY valid JSON.
 """
 
-        # Primary and backup models
-        models_to_try = [self.model_name, "gemini-3.5-flash", "gemini-3.6-flash", "gemini-3.7-flash"]
+        # Primary and backup models (prioritize ultra-fast models with no 503 spikes)
+        models_to_try = [self.model_name, "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.5-flash"]
         # Remove duplicates while preserving order
         models_to_try = list(dict.fromkeys(models_to_try))
         last_error = None
@@ -132,7 +132,8 @@ Output ONLY valid JSON.
                     config=types.GenerateContentConfig(
                         system_instruction=SYSTEM_INSTRUCTION,
                         temperature=0.2,
-                        response_mime_type="application/json"
+                        response_mime_type="application/json",
+                        max_output_tokens=700
                     )
                 )
                 response = chat.send_message(prompt_content)

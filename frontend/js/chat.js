@@ -215,16 +215,22 @@ async function requestAIResponse(chatId, userMessage) {
       content: m.content
     }));
 
+    const controller = new AbortController();
+    const timeoutTimer = setTimeout(() => controller.abort(), 45000);
+
     const response = await fetch(`${API_BASE_URL}/api/chat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
+      signal: controller.signal,
       body: JSON.stringify({
         message: userMessage,
         history: recentMessages
       })
     });
+
+    clearTimeout(timeoutTimer);
 
     if (!response.ok) {
       throw new Error(`Backend returned status ${response.status}`);
@@ -241,35 +247,62 @@ async function requestAIResponse(chatId, userMessage) {
     renderMessage(aiMsg, 'assistant', data.analysis);
 
   } catch (error) {
-    console.warn('Backend unavailable, utilizing local news analysis fallback:', error);
+    console.warn('Backend request failed:', error);
     hideTyping();
-    fallbackAIResponse(chatId, userMessage);
+    handleChatError(chatId, userMessage, error);
   }
 
   scrollToBottom();
 }
 
-function fallbackAIResponse(chatId, userMessage) {
-  // Determine if this is a news-related query
-  const newsKeywords = ['news', 'headline', 'article', 'claim', 'verify', 'fact', 'check', 'true', 'false', 'fake', 'real', 'source', 'bias', 'credib', 'misinformation', 'report', 'media'];
-  const isNewsQuery = newsKeywords.some(kw => userMessage.toLowerCase().includes(kw)) || Math.random() > 0.3;
+function handleChatError(chatId, userMessage, error) {
+  const isTimeout = error.name === 'AbortError' || (error.message || '').includes('timeout');
+  const messageText = isTimeout
+    ? "The AI fact-checking engine is taking longer than usual to cross-reference multiple sources. Please try again."
+    : "Unable to reach the AI verification server right now. The server might be waking up or experiencing high traffic.";
 
-  let response;
-  if (isNewsQuery) {
-    response = newsResponses[Math.floor(Math.random() * newsResponses.length)];
-    const aiMsg = addMessage(chatId, {
-      role: 'assistant',
-      content: response.text,
-      analysis: response.analysis,
-    });
-    renderMessage(aiMsg, 'assistant', response.analysis);
-  } else {
-    const text = generalResponses[Math.floor(Math.random() * generalResponses.length)];
-    const aiMsg = addMessage(chatId, { role: 'assistant', content: text });
-    renderMessage(aiMsg, 'assistant');
-  }
+  const aiMsg = addMessage(chatId, {
+    role: 'assistant',
+    content: messageText,
+    isError: true,
+    failedQuery: userMessage
+  });
 
-  scrollToBottom();
+  if (!messagesEl) return;
+  const div = document.createElement('div');
+  div.className = 'message message-assistant';
+  div.dataset.messageId = aiMsg.id;
+  const time = new Date(aiMsg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  div.innerHTML = `
+    <div class="message-avatar">
+      <img src="/assets/logo.png" alt="NewsScope AI" class="avatar-logo-img" />
+    </div>
+    <div style="flex: 1; max-width: calc(100% - 48px);">
+      <div class="message-content">
+        <p style="color: var(--text-secondary); margin-bottom: 10px;">${escapeHtml(messageText)}</p>
+        <button class="btn-retry-chat" data-query="${escapeHtml(userMessage)}" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); font-size: var(--font-xs); cursor: pointer; color: var(--text-primary); font-weight: 500;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Retry Verification
+        </button>
+      </div>
+      <div class="message-time">${time}</div>
+    </div>
+  `;
+
+  div.querySelector('.btn-retry-chat')?.addEventListener('click', (e) => {
+    const q = e.currentTarget.dataset.query;
+    if (q) {
+      if (textarea) textarea.value = q;
+      handleSend();
+    }
+  });
+
+  messagesEl.appendChild(div);
 }
 
 function renderMessage(msg, role, analysis = null) {
