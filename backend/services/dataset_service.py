@@ -67,24 +67,41 @@ class DatasetService:
         scored_items.sort(key=lambda x: x[0], reverse=True)
         return [item for _, item in scored_items[:limit]]
 
-    def find_similar_claim(self, user_claim: str, threshold_score: int = 2) -> Optional[Dict[str, Any]]:
+    def find_similar_claim(self, user_claim: str, threshold_score: int = 4) -> Optional[Dict[str, Any]]:
         """Finds if a user query closely matches a known ground-truth benchmark item."""
-        results = self.search(user_claim, limit=1)
+        stopwords = {
+            "will", "says", "with", "from", "that", "this", "were", "what", "when", "where",
+            "have", "been", "after", "into", "over", "more", "about", "their", "there", "during",
+            "recent", "months", "meet", "venue", "amid", "says", "told", "said", "just", "also"
+        }
+        q_terms = [t.lower().strip("?,!.:'\"") for t in user_claim.strip().split() if len(t) > 3]
+        meaningful_terms = [t for t in q_terms if t not in stopwords]
+
+        if len(meaningful_terms) < 2:
+            return None
+
+        results = self.search(" ".join(meaningful_terms), limit=3)
         if not results:
             return None
-        
-        top_item = results[0]
-        q_terms = [t.lower() for t in user_claim.strip().split() if len(t) > 3]
-        text_corpus = " ".join([
-            top_item.get("headline", ""),
-            top_item.get("claim", ""),
-            " ".join(top_item.get("tags", []))
-        ]).lower()
 
-        overlap = sum(1 for term in q_terms if term in text_corpus)
-        if overlap >= threshold_score:
-            return top_item
-        return None
+        best_item = None
+        best_ratio = 0.0
+
+        for candidate in results:
+            text_corpus = " ".join([
+                candidate.get("headline", ""),
+                candidate.get("claim", ""),
+                " ".join(candidate.get("tags", []))
+            ]).lower()
+
+            overlap = sum(1 for term in meaningful_terms if term in text_corpus)
+            ratio = overlap / len(meaningful_terms)
+            # Require at least 45% of meaningful query terms and >= 3 matching terms
+            if ratio >= 0.45 and overlap >= 3 and ratio > best_ratio:
+                best_ratio = ratio
+                best_item = candidate
+
+        return best_item
 
     def get_statistics(self) -> Dict[str, Any]:
         """Calculates dataset analytics, category distribution, and average scores."""

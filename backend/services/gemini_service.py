@@ -119,8 +119,8 @@ Analyze the following user query or claim for validity, factual accuracy, and bi
 Output ONLY valid JSON.
 """
 
-        # Primary and backup models (prioritize ultra-fast models with no 503 spikes)
-        models_to_try = [self.model_name, "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.5-flash"]
+        # Primary and backup models: prioritize stable models with zero 503 spikes
+        models_to_try = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite", self.model_name]
         # Remove duplicates while preserving order
         models_to_try = list(dict.fromkeys(models_to_try))
         last_error = None
@@ -133,7 +133,7 @@ Output ONLY valid JSON.
                         system_instruction=SYSTEM_INSTRUCTION,
                         temperature=0.2,
                         response_mime_type="application/json",
-                        max_output_tokens=700
+                        max_output_tokens=1500
                     )
                 )
                 response = chat.send_message(prompt_content)
@@ -182,6 +182,15 @@ Output ONLY valid JSON.
                     return json.loads(match.group(0))
                 except Exception:
                     pass
+
+            # Never leak raw truncated JSON syntax (e.g. {"is_news_query": true) to user
+            if raw.strip().startswith("{") or "is_news_query" in raw:
+                return {
+                    "is_news_query": False,
+                    "conversational_reply": "The AI verification response was incomplete or interrupted. Please try submitting your claim again.",
+                    "analysis": None
+                }
+
             # Construct a safe structure
             return {
                 "is_news_query": False,
