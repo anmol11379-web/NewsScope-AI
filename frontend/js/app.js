@@ -5,9 +5,8 @@
 import { getUser, removeUser } from './storage.js';
 import { initTheme, toggleTheme } from './theme.js';
 import { initAuth, resetAuthForms } from './auth.js';
-import { initVoice } from './voice.js';
 import { initSidebar, updateUserInfo, refreshSidebar } from './sidebar.js';
-import { initChat, loadChat, setVoiceTranscript, handleSend } from './chat.js';
+import { initChat, loadChat, handleSend } from './chat.js';
 import { initDatasetModal } from './dataset-modal.js';
 import { API_BASE_URL } from './config.js';
 
@@ -118,13 +117,6 @@ function showChatView(user) {
 
     initChat();
     initDatasetModal();
-
-    initVoice((transcript, isFinal) => {
-      setVoiceTranscript(transcript);
-      if (isFinal) {
-        setTimeout(() => handleSend(), 300);
-      }
-    });
 
     // Theme toggle button
     const themeBtn = document.getElementById('theme-toggle');

@@ -235,11 +235,23 @@
   width: 14px;
   height: 14px;
 }
+.chat-history-item .chat-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
 .chat-history-item .chat-item-icon svg {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
-  opacity: 0.5;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+}
+.chat-history-item:hover .chat-item-icon svg,
+.chat-history-item.active .chat-item-icon svg {
+  opacity: 1;
+  color: var(--accent-primary);
 }
 
 /* Sidebar Footer */
@@ -498,39 +510,6 @@
   height: 18px;
 }
 
-/* Voice Button */
-.voice-btn {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
-  transition: background var(--transition-fast),
-              color var(--transition-fast);
-  position: relative;
-}
-.voice-btn:hover {
-  background: var(--glass-bg-hover);
-  color: var(--text-primary);
-}
-.voice-btn.recording {
-  color: var(--accent);
-  background: var(--accent-soft);
-}
-.voice-btn.recording::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: var(--radius-md);
-  border: 2px solid var(--accent);
-  animation: voice-pulse 1.5s ease-out infinite;
-}
-.voice-btn svg {
-  width: 18px;
-  height: 18px;
-}
 
 /* ════════════════════════════════════════════════════════
    MOBILE RESPONSIVE

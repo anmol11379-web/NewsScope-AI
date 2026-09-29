@@ -41,9 +41,19 @@ When the user provides a statement, headline, article snippet, URL, or claim:
    - Write a concise 2-4 sentence executive summary detailing why the claim holds or fails.
    - Extract key factual sub-claims.
 
+3. Always generate a concise, human-readable "chat_title" (2 to 5 words) that categorizes the chat type and identifies the specific topic or claim:
+   - For headline verification: e.g., "Headline: [Subject]" (e.g., "Headline: Apple Foldable Rumor")
+   - For source credibility check: e.g., "Source Check: [Outlet]" (e.g., "Source Check: BBC News")
+   - For media bias & framing analysis: e.g., "Bias Check: [Topic]" (e.g., "Bias Check: Climate Policy")
+   - For fact-checking claims: e.g., "Fact Check: [Subject]" (e.g., "Fact Check: Artemis II 2025")
+   - For viral hoaxes & deepfakes: e.g., "Hoax Check: [Subject]" or "Deepfake: [Subject]"
+   - For platform help / onboarding: e.g., "Getting Started" or "NewsScope Guide"
+   NEVER output generic placeholders like "General Chat", "New Chat", "Chat", or empty string.
+
 You MUST always output valid, parseable JSON matching this schema:
 {
   "is_news_query": true,
+  "chat_title": "Concise 2-5 Word Title",
   "conversational_reply": "I've cross-referenced this claim across primary sources and verification archives. Here is my credibility assessment:",
   "analysis": {
     "title": "Credibility & Fact-Check Report",
@@ -86,6 +96,7 @@ class GeminiService:
         if any(lower_q == g or lower_q.startswith(g + " ") for g in greetings) and len(lower_q.split()) <= 5:
             return {
                 "is_news_query": False,
+                "chat_title": "Getting Started",
                 "conversational_reply": "Hello! 👋 I'm NewsScope AI, your news verification assistant. Paste any news headline, article, or claim, and I'll analyze its credibility, check for media bias, and pull verified sources for you!",
                 "analysis": None
             }
@@ -148,6 +159,9 @@ Output ONLY valid JSON.
                         "fact_checker": matched_item.get("fact_checker")
                     }
 
+                if not parsed.get("chat_title") or str(parsed.get("chat_title")).strip().lower() in ["general chat", "new chat", "chat", ""]:
+                    parsed["chat_title"] = self._generate_fallback_title(query, matched_item)
+
                 return parsed
 
             except Exception as e:
@@ -198,10 +212,82 @@ Output ONLY valid JSON.
                 "analysis": None
             }
 
+    def _generate_fallback_title(self, query: str, matched_item: Optional[Dict[str, Any]] = None) -> str:
+        """Intelligently classifies the chat type and generates a 2-5 word title based on query intent."""
+        if matched_item and matched_item.get("headline"):
+            headline = matched_item["headline"]
+            clean_head = re.sub(r'^[“"\'\s]+|[”"\'\s]+$', '', headline)
+            words = clean_head.split()[:4]
+            return f"Fact Check: {' '.join(words)}"
+
+        q = (query or "").strip()
+        lower_q = q.lower()
+
+        # Greetings & General assistance
+        greetings = ["hi", "hello", "hey", "hola", "namaste", "good morning", "good evening", "good afternoon"]
+        if any(lower_q == g or lower_q.startswith(g + " ") for g in greetings) and len(lower_q.split()) <= 4:
+            return "Getting Started"
+        if any(phrase in lower_q for phrase in ["who are you", "what can you do", "help", "how do you work", "how does this work", "guide"]):
+            return "NewsScope Guide"
+
+        # Check for colon / spaced dash separator
+        colon_match = re.search(r'^(?:verify|check|fact-?check|analyze|investigate)?\s*(?:this|the)?\s*(?:headline|claim|article|story|news|statement|source|outlet|credibility)?\s*(?:for me)?\s*(?::|\s+[-—]\s+)\s*(.+)$', q, re.I)
+        payload = colon_match.group(1).strip() if colon_match else None
+
+        # Source credibility check
+        if any(phrase in lower_q for phrase in ["verify source", "verify the credibility of a news source", "credibility of", "is source", "check source", "source check", "verify a source"]):
+            if payload and len(payload) > 1:
+                return f"Source: {payload.split()[:3]}"
+            m = re.search(r'(?:credibility of|source|outlet)\s+([A-Za-z0-9\s\.\-]{2,25})', q, re.I)
+            if m:
+                cand = re.sub(r'[?.:!]+$', '', m.group(1).strip())
+                if cand.lower() not in ["a news source", "the source", "this", "news source", "a source"]:
+                    return f"Source: {cand.title()}"
+            return "Source Credibility Check"
+
+        # Media bias & framing analysis
+        if any(phrase in lower_q for phrase in ["bias and framing", "political bias", "analyze article bias", "media bias", "framing", "is it biased", "article bias"]):
+            if payload and len(payload) > 2:
+                words = payload.split()[:3]
+                return f"Bias Check: {' '.join(words).title()}"
+            return "Bias & Framing Analysis"
+
+        # Headline verification
+        if any(phrase in lower_q for phrase in ["verify this headline", "check a headline", "verify headline", "headline check", "is this headline"]):
+            if payload and len(payload) > 2:
+                words = payload.split()[:4]
+                return f"Headline: {' '.join(words).title()}"
+            return "Headline Verification"
+
+        # Viral hoaxes & deepfakes
+        if any(phrase in lower_q for phrase in ["deepfake", "manipulated video", "ai generated image", "fake image", "viral hoax", "hoax"]):
+            if payload and len(payload) > 2:
+                words = payload.split()[:3]
+                return f"Hoax Check: {' '.join(words).title()}"
+            return "Media & Deepfake Check"
+
+        # Fact checking / claim checking
+        if payload and len(payload) > 2:
+            words = payload.split()[:4]
+            return f"Fact Check: {' '.join(words).title()}"
+
+        clean = re.sub(r'^(?:can you\s+)?(?:please\s+)?(?:fact-?check|verify|check)\s+(?:this\s+)?(?:claim|statement|news)?\s*(?:for me)?\s*[:—\-]?\s*', '', q, flags=re.I).strip()
+        clean = re.sub(r'^(?:is it true that|did|does|is|are|can)\s+', '', clean, flags=re.I).strip()
+        clean = re.sub(r'^[“"\'\s]+|[”"\'\s]+$', '', clean).strip()
+        clean = re.sub(r'[?.:!]+$', '', clean).strip()
+
+        words = clean.split()[:4]
+        if words and len(' '.join(words)) > 2:
+            return f"Fact Check: {' '.join(words).title()}"
+
+        return "NewsScope Verification"
+
     def _build_dataset_fallback(self, query: str, item: Dict[str, Any]) -> Dict[str, Any]:
         """Provides verified ground truth response from local dataset if API call fails."""
+        title = self._generate_fallback_title(query, item)
         return {
             "is_news_query": True,
+            "chat_title": title,
             "conversational_reply": f"I verified this against the NewsScope benchmark database: {item.get('detailed_analysis')}",
             "analysis": {
                 "title": "Benchmark Verified Analysis",
@@ -227,6 +313,7 @@ Output ONLY valid JSON.
         if any(lower_q == g or lower_q.startswith(g + " ") for g in greetings):
             return {
                 "is_news_query": False,
+                "chat_title": "Getting Started",
                 "conversational_reply": "Hello! 👋 I'm NewsScope AI, your news verification assistant. Paste any news headline, article, or claim, and I'll analyze its credibility, check for media bias, and pull verified sources for you!",
                 "analysis": None
             }
@@ -241,8 +328,10 @@ Output ONLY valid JSON.
         else:
             friendly_message = "The AI service is temporarily unavailable. Please try your request again in a moment."
 
+        title = self._generate_fallback_title(query)
         return {
             "is_news_query": False,
+            "chat_title": title,
             "conversational_reply": friendly_message,
             "analysis": None
         }

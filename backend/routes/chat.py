@@ -22,6 +22,7 @@ class ChatResponse(BaseModel):
     role: str = "assistant"
     content: str
     analysis: Optional[Dict[str, Any]] = None
+    chat_title: Optional[str] = None
 
 @router.post("", response_model=ChatResponse)
 def handle_chat(payload: ChatRequest):
@@ -33,9 +34,11 @@ def handle_chat(payload: ChatRequest):
 
     reply_content = result.get("conversational_reply") or "Here is the analysis of your query:"
     analysis_data = result.get("analysis")
+    chat_title = result.get("chat_title")
 
     return ChatResponse(
         role="assistant",
         content=reply_content,
-        analysis=analysis_data
+        analysis=analysis_data,
+        chat_title=chat_title
     )

@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════ */
 
 import {
-  getChat, addMessage, createChat,
+  getChat, addMessage, createChat, updateChat, generateSimplifiedTitle,
   getActiveChatId, setActiveChatId, getChats
 } from './storage.js';
 import { refreshSidebar } from './sidebar.js';
@@ -246,6 +246,25 @@ async function requestAIResponse(chatId, userMessage) {
     });
     renderMessage(aiMsg, 'assistant', data.analysis);
 
+    // Update chat title based on the specific type of chat returned by AI
+    const currentChat = getChat(chatId);
+    if (currentChat && !currentChat.isCustomTitle) {
+      let finalTitle = data.chat_title;
+      if (!finalTitle && data.analysis && data.analysis.title && data.analysis.title !== 'Credibility & Fact-Check Report' && data.analysis.title !== 'Credibility Analysis') {
+        finalTitle = data.analysis.title;
+      }
+      if (!finalTitle && data.analysis && data.analysis.key_claims && data.analysis.key_claims.length > 0) {
+        finalTitle = generateSimplifiedTitle(data.analysis.key_claims[0]);
+      }
+      if (finalTitle && typeof finalTitle === 'string' && finalTitle.trim()) {
+        const cleanTitle = finalTitle.trim();
+        if (!['General Chat', 'New Chat'].includes(cleanTitle)) {
+          updateChat(chatId, { title: cleanTitle });
+          refreshSidebar();
+        }
+      }
+    }
+
   } catch (error) {
     console.warn('Backend request failed:', error);
     hideTyping();
@@ -464,13 +483,6 @@ function scrollToBottom() {
     requestAnimationFrame(() => {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     });
-  }
-}
-
-export function setVoiceTranscript(text) {
-  if (textarea) {
-    textarea.value = text;
-    textarea.dispatchEvent(new Event('input'));
   }
 }
 
