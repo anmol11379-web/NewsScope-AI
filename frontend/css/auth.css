@@ -60,9 +60,13 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 440px;
-  padding: var(--space-4);
-  animation: fade-in-up 0.6s ease-out;
+  max-width: 520px;
+  max-height: 96vh;
+  padding: 12px;
+  animation: fade-in-up 0.5s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* ── Auth Card ── */
@@ -72,7 +76,7 @@
   border-radius: var(--radius-xl);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  padding: var(--space-10);
+  padding: 22px 28px;
   box-shadow: var(--shadow-xl);
 }
 
@@ -81,17 +85,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-3);
-  margin-bottom: var(--space-8);
+  gap: var(--space-2);
+  margin-bottom: 12px;
 }
 .auth-logo-icon {
-  width: 52px;
-  height: 52px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 25px rgba(20, 220, 180, 0.35), var(--accent-glow);
+  box-shadow: 0 0 20px rgba(20, 220, 180, 0.3), var(--accent-glow);
   position: relative;
 }
 .auth-logo-img {
@@ -105,7 +109,7 @@
   transform: rotate(15deg) scale(1.06);
 }
 .auth-logo-text {
-  font-size: var(--font-xl);
+  font-size: var(--font-lg);
   font-weight: var(--font-weight-bold);
   color: var(--text-primary);
 }
@@ -122,12 +126,12 @@
   background: var(--glass-bg);
   border-radius: var(--radius-md);
   padding: 3px;
-  margin-bottom: var(--space-6);
+  margin-bottom: 14px;
   border: 1px solid var(--border-subtle);
 }
 .auth-tab {
   flex: 1;
-  padding: var(--space-2) var(--space-4);
+  padding: 6px var(--space-3);
   text-align: center;
   font-size: var(--font-sm);
   font-weight: var(--font-weight-medium);
@@ -154,11 +158,47 @@
   display: block;
   animation: fade-in 0.3s ease-out;
 }
+
+.auth-form .form-group {
+  margin-bottom: 10px;
+}
+
+.auth-form .form-group label {
+  margin-bottom: 4px;
+  font-size: 12px;
+}
+
+.auth-form .input-field {
+  padding: 8px 12px;
+  font-size: 13.5px;
+}
+
+.auth-form .password-toggle {
+  top: 29px;
+  right: 10px;
+}
+
+/* 2-column field row */
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 10px;
+}
+
 .auth-form .btn-primary {
   width: 100%;
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--font-base);
-  margin-top: var(--space-2);
+  padding: 9px var(--space-4);
+  font-size: var(--font-sm);
+  margin-top: 4px;
+  border-radius: var(--radius-md);
+}
+
+.auth-form .divider {
+  margin: 10px 0;
+  font-size: var(--font-xs);
 }
 
 /* Google Button */
@@ -166,14 +206,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
   width: 100%;
-  padding: var(--space-3) var(--space-4);
+  padding: 8px var(--space-4);
   background: var(--glass-bg);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-md);
   color: var(--text-primary);
-  font-size: var(--font-base);
+  font-size: var(--font-sm);
   font-weight: var(--font-weight-medium);
   transition: background var(--transition-fast),
               border-color var(--transition-fast);
@@ -183,8 +223,8 @@
   border-color: var(--border-strong);
 }
 .btn-google svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 /* Shake animation for errors */
