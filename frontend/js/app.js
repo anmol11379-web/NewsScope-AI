@@ -197,21 +197,35 @@ function openProfileModal() {
   }
 
   // 4. Phone Number
+  const verifiedBadge = document.getElementById('profile-phone-verified-badge');
   if (phoneEl) {
     if (user.phone && user.phone.trim()) {
       phoneEl.textContent = user.phone.trim();
       phoneEl.className = 'profile-info-val';
+      if (verifiedBadge) verifiedBadge.style.display = user.phoneVerified ? 'inline-flex' : 'none';
     } else {
       phoneEl.textContent = 'Empty';
       phoneEl.className = 'profile-info-val empty';
+      if (verifiedBadge) verifiedBadge.style.display = 'none';
     }
   }
 
-  // Ensure edit mode is closed on opening
+  // Ensure edit mode and OTP verification are reset on opening
   const phoneDisplayWrap = document.getElementById('profile-phone-display-wrap');
   const phoneEditWrap = document.getElementById('profile-phone-edit-wrap');
+  const otpWrap = document.getElementById('profile-otp-wrap');
+  const phoneError = document.getElementById('profile-phone-error');
+  const otpError = document.getElementById('profile-otp-error');
+  const phoneInput = document.getElementById('profile-phone-input');
+  const otpInput = document.getElementById('profile-otp-input');
+
   if (phoneDisplayWrap) phoneDisplayWrap.style.display = 'flex';
   if (phoneEditWrap) phoneEditWrap.style.display = 'none';
+  if (otpWrap) otpWrap.style.display = 'none';
+  if (phoneError) { phoneError.textContent = ''; phoneError.style.display = 'none'; }
+  if (otpError) { otpError.textContent = ''; otpError.style.display = 'none'; }
+  if (phoneInput) phoneInput.value = user.phone || '';
+  if (otpInput) otpInput.value = '';
 
   modalBackdrop.classList.add('active');
 }
@@ -272,58 +286,102 @@ function setupUserControls() {
     modalFooterCloseBtn.addEventListener('click', closeProfileModal);
   }
 
-  // Pencil button to add/edit phone number
+  // Pencil button to add/edit phone number with OTP verification
   const pencilBtn = document.getElementById('profile-pencil-btn');
   const phoneDisplayWrap = document.getElementById('profile-phone-display-wrap');
   const phoneEditWrap = document.getElementById('profile-phone-edit-wrap');
+  const otpWrap = document.getElementById('profile-otp-wrap');
   const phoneInput = document.getElementById('profile-phone-input');
   const phoneSaveBtn = document.getElementById('profile-phone-save-btn');
   const phoneCancelBtn = document.getElementById('profile-phone-cancel-btn');
+  const phoneError = document.getElementById('profile-phone-error');
   const phoneEl = document.getElementById('profile-modal-phone');
+  const verifiedBadge = document.getElementById('profile-phone-verified-badge');
+
+  // OTP elements
+  const otpInput = document.getElementById('profile-otp-input');
+  const otpVerifyBtn = document.getElementById('profile-otp-verify-btn');
+  const otpCancelBtn = document.getElementById('profile-otp-cancel-btn');
+  const otpResendBtn = document.getElementById('profile-otp-resend-btn');
+  const otpError = document.getElementById('profile-otp-error');
+  const otpBannerText = document.getElementById('profile-otp-banner-text');
+  const otpDemoCode = document.getElementById('profile-otp-demo-code');
+
+  let pendingPhoneNumber = '';
+  let generatedOtp = '4829';
+
+  const generateOtpCode = () => {
+    return String(Math.floor(1000 + Math.random() * 9000));
+  };
 
   if (pencilBtn && phoneEditWrap && phoneDisplayWrap && phoneInput) {
     pencilBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const user = getUser() || {};
       phoneInput.value = user.phone || '';
+      if (phoneError) phoneError.style.display = 'none';
       phoneDisplayWrap.style.display = 'none';
+      if (otpWrap) otpWrap.style.display = 'none';
       phoneEditWrap.style.display = 'block';
       phoneInput.focus();
     });
 
-    const savePhone = () => {
+    // Step 1: User enters phone number and clicks "Save" -> sends/shows OTP
+    const requestPhoneOtp = () => {
       const val = phoneInput.value.trim();
-      const user = getUser() || {};
-      user.phone = val;
-      saveUser(user);
+      const digits = val.replace(/\D/g, '');
+      if (!val || digits.length < 7) {
+        if (phoneError) {
+          phoneError.textContent = 'Please enter a valid phone number (at least 7 digits).';
+          phoneError.style.display = 'block';
+        }
+        phoneInput.focus();
+        return;
+      }
 
-      if (val) {
-        phoneEl.textContent = val;
-        phoneEl.className = 'profile-info-val';
-      } else {
-        phoneEl.textContent = 'Empty';
-        phoneEl.className = 'profile-info-val empty';
+      if (phoneError) phoneError.style.display = 'none';
+      pendingPhoneNumber = val;
+      generatedOtp = generateOtpCode();
+
+      if (otpBannerText) {
+        otpBannerText.innerHTML = `OTP sent to <strong>${val}</strong>`;
+      }
+      if (otpDemoCode) {
+        otpDemoCode.textContent = generatedOtp;
+      }
+      if (otpInput) {
+        otpInput.value = '';
+      }
+      if (otpError) {
+        otpError.textContent = '';
+        otpError.style.display = 'none';
       }
 
       phoneEditWrap.style.display = 'none';
-      phoneDisplayWrap.style.display = 'flex';
+      if (otpWrap) {
+        otpWrap.style.display = 'block';
+      }
+      if (otpInput) {
+        otpInput.focus();
+      }
     };
 
     if (phoneSaveBtn) {
       phoneSaveBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        savePhone();
+        requestPhoneOtp();
       });
     }
 
     phoneInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        savePhone();
+        requestPhoneOtp();
       } else if (e.key === 'Escape') {
         e.preventDefault();
         phoneEditWrap.style.display = 'none';
         phoneDisplayWrap.style.display = 'flex';
+        if (phoneError) phoneError.style.display = 'none';
       }
     });
 
@@ -332,6 +390,95 @@ function setupUserControls() {
         e.stopPropagation();
         phoneEditWrap.style.display = 'none';
         phoneDisplayWrap.style.display = 'flex';
+        if (phoneError) phoneError.style.display = 'none';
+      });
+    }
+
+    // Step 2: User verifies OTP and saves phone number
+    const verifyAndSaveOtp = () => {
+      const enteredCode = otpInput ? otpInput.value.trim() : '';
+      if (!enteredCode) {
+        if (otpError) {
+          otpError.textContent = 'Please enter the 4-digit OTP code.';
+          otpError.style.color = '#ef4444';
+          otpError.style.display = 'block';
+        }
+        if (otpInput) otpInput.focus();
+        return;
+      }
+
+      // Check entered code against generated OTP or universal testing codes
+      if (enteredCode === generatedOtp || enteredCode === '4829' || enteredCode === '1234') {
+        // Success: persist to storage
+        const user = getUser() || {};
+        user.phone = pendingPhoneNumber;
+        user.phoneVerified = true;
+        saveUser(user);
+
+        if (phoneEl) {
+          phoneEl.textContent = pendingPhoneNumber;
+          phoneEl.className = 'profile-info-val';
+        }
+        if (verifiedBadge) {
+          verifiedBadge.style.display = 'inline-flex';
+        }
+
+        if (otpWrap) otpWrap.style.display = 'none';
+        phoneDisplayWrap.style.display = 'flex';
+      } else {
+        if (otpError) {
+          otpError.textContent = 'Invalid OTP code. Please enter the correct code.';
+          otpError.style.color = '#ef4444';
+          otpError.style.display = 'block';
+        }
+        if (otpInput) otpInput.focus();
+      }
+    };
+
+    if (otpVerifyBtn) {
+      otpVerifyBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        verifyAndSaveOtp();
+      });
+    }
+
+    if (otpInput) {
+      otpInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          verifyAndSaveOtp();
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          if (otpWrap) otpWrap.style.display = 'none';
+          phoneDisplayWrap.style.display = 'flex';
+        }
+      });
+    }
+
+    // Change Number button on OTP card
+    if (otpCancelBtn) {
+      otpCancelBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (otpWrap) otpWrap.style.display = 'none';
+        phoneEditWrap.style.display = 'block';
+        phoneInput.focus();
+      });
+    }
+
+    // Resend OTP button
+    if (otpResendBtn) {
+      otpResendBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        generatedOtp = generateOtpCode();
+        if (otpDemoCode) otpDemoCode.textContent = generatedOtp;
+        if (otpError) {
+          otpError.textContent = 'New OTP sent!';
+          otpError.style.color = '#10b981';
+          otpError.style.display = 'block';
+          setTimeout(() => {
+            if (otpError.textContent === 'New OTP sent!') otpError.style.display = 'none';
+          }, 2000);
+        }
       });
     }
   }
