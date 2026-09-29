@@ -9,15 +9,63 @@ import { initVoice } from './voice.js';
 import { initSidebar, updateUserInfo, refreshSidebar } from './sidebar.js';
 import { initChat, loadChat, setVoiceTranscript, handleSend } from './chat.js';
 import { initDatasetModal } from './dataset-modal.js';
+import { API_BASE_URL } from './config.js';
+
+// ══════════════════════════════════════════════════════
+// BACKEND WARMUP (Wakes up Render container immediately on page open)
+// ══════════════════════════════════════════════════════
+function warmupBackend() {
+  const pill = document.getElementById('backend-status-pill');
+  const updatePill = (statusClass, text, title) => {
+    if (!pill) return;
+    pill.className = `backend-status-pill ${statusClass}`;
+    if (title) pill.title = title;
+    const label = pill.querySelector('.status-label');
+    if (label) label.textContent = text;
+  };
+
+  updatePill('warming', 'Waking server...', 'Pinging backend to start immediately on page load');
+
+  let attempts = 0;
+  const maxAttempts = 20;
+
+  const ping = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/health`, {
+        method: 'GET',
+        cache: 'no-cache'
+      });
+      if (res.ok) {
+        const data = await res.json().catch(() => ({}));
+        updatePill('ready', 'Online', `Connected to backend (Model: ${data.gemini_model || 'Gemini Flash'})`);
+        return;
+      }
+    } catch (err) {
+      // Backend still cold-starting
+    }
+
+    attempts++;
+    if (attempts < maxAttempts) {
+      setTimeout(ping, 3000);
+    } else {
+      updatePill('error', 'Offline', 'Backend could not be reached after multiple retries.');
+    }
+  };
+
+  ping();
+}
 
 // ══════════════════════════════════════════════════════
 // BOOT
 // ══════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Init theme first (no flash of wrong theme)
+  // 1. Instantly wake up the backend container the moment the user opens the page
+  warmupBackend();
+
+  // 2. Init theme first (no flash of wrong theme)
   initTheme();
 
-  // 2. Check auth state
+  // 3. Check auth state
   const user = getUser();
   if (user) {
     showChatView(user);
